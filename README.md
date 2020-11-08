@@ -19,7 +19,7 @@
 - MongoDB
 - Express
 - React
-- Node
+- Node JS
 
 #### Languages
 
