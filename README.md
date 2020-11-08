@@ -12,6 +12,28 @@
 - Keep track of daily calorie intake and compare against recommended calorie intake
 - Enter and track excercise and get back estimated burned calories
 
+### Core Tech Used
+
+---
+
+- MongoDB
+- Express
+- React
+- Node
+
+#### Languages
+
+- Javascript
+- CSS
+
+#### Dependencies
+
+- Mongoose
+- Nodemon
+- Morgan
+- Cors
+- body-parser
+
 ### Full Entity Relationship Diagram
 
 ---
