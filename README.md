@@ -45,6 +45,8 @@
 
 ---
 
+![Image of Component Flow](https://lucid.app/publicSegments/view/cc0250a4-82ac-4977-9553-919c1ee8a648/image.png)
+
 ### Author
 
 ---
