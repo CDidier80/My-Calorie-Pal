@@ -6,9 +6,9 @@
 
 ---
 
-- Fitness Tracker
+- Fitness Tracker :muscle:
 - Gives recommended calorie intake based on gender and weight
-- Lookup food on a third party api/or enter nutritional information manually and create meals with them
+- Lookup food on a third party api/or enter nutritional information manually and create meals with them :pizza:
 - Keep track of daily calorie intake and compare against recommended calorie intake
 - Enter and track excercise and get back estimated burned calories
 
@@ -24,6 +24,7 @@
 #### Languages
 
 - Javascript
+- JSX
 - CSS
 
 #### Dependencies
