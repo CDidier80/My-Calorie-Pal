@@ -31,7 +31,13 @@
 
 ### Full Entity Relationship Diagram
 
-![Image of Database](https://lucid.app/publicSegments/view/f5eab582-21d1-4e43-9f7f-f3f3a232455c/image.png)
+![Image of ERD](https://lucid.app/publicSegments/view/f5eab582-21d1-4e43-9f7f-f3f3a232455c/image.png)
+
+---
+
+### Component Hierarchy Diagram
+
+![image of CHD](https://lucid.app/publicSegments/view/cc0250a4-82ac-4977-9553-919c1ee8a648/image.png)
 
 ---
 
