@@ -24,6 +24,7 @@
 - Express
 - React
 - Node
+- Mongoose
 - HTML/Javascript/CSS
 
 ---
