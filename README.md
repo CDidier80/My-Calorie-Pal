@@ -44,6 +44,11 @@
 
 The project was deployed on ... and can be found [here](...)
 
+### Future Updates
+
+- [x] ~~come up with stuff~~
+- []
+
 ### Credits
 
 - Api: https://www.nutritionix.com/
