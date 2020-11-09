@@ -34,20 +34,18 @@
 
 ---
 
-### Component Hierarchy Diagram
-
-![Image of Component Flow](https://lucid.app/publicSegments/view/cc0250a4-82ac-4977-9553-919c1ee8a648/image.png)
-
----
-
 ### Getting Started
 
 The project was deployed on ... and can be found [here](...)
+
+---
 
 ### Future Updates
 
 - [x] ~~come up with stuff~~
 - [ ] other stuff
+
+---
 
 ### Credits
 
