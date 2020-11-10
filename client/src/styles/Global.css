@@ -1,0 +1,24 @@
+body {
+  background-image: src=
+    "https://www.shutterstock.com/image-photo/blur-abstract-background-exercise-equipments-modern-596581631";
+  /* background-color: white; */
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+.flex-lg {
+  flex: 2;
+}
+.flex-sm {
+  flex: 1;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
