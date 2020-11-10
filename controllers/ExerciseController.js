@@ -5,6 +5,7 @@ const CreateExercise = async (req, res) => {
   const exercise = new Exercise({
     description: body.description,
     calsBurned: body.calsBurned,
+    date: body.date,
     user_id: req.params.user_id,
   });
   exercise.save();

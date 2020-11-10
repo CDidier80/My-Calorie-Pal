@@ -4,6 +4,7 @@ const CreateMeal = async (req, res) => {
   const body = req.body;
   const meal = new Meal({
     description: body.description,
+    date: body.date,
     user_id: req.params.user_id,
   });
   meal.save();

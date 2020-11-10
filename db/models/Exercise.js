@@ -10,6 +10,10 @@ module.exports = new Schema(
       type: Number,
       required: true,
     },
+    date: {
+      type: String,
+      required: true,
+    },
     user_id: {
       type: Schema.Types.ObjectId,
       ref: "users",
