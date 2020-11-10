@@ -1,0 +1,36 @@
+{
+  "name": "my-calorie-pal",
+  "version": "1.0.0",
+  "description": "## Date of completion",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js",
+    "db:seed": "node ./db/seed.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davey4/My-Calorie-Pal.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davey4/My-Calorie-Pal/issues"
+  },
+  "homepage": "https://github.com/davey4/My-Calorie-Pal#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^4.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.13",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
