@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Initialize Middleware
 
-app.get("/", (req, res) => res.send({ msg: "Server Working" }));
+app.get("/", (req, res) => res.send({ msg: "Server Working!" }));
 app.use("/api", AppRouter);
 
 app.listen(PORT, async () => {

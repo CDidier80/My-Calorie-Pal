@@ -58,3 +58,10 @@ const RefreshSession = (req, res) => {
     throw error;
   }
 };
+
+module.exports = {
+  GetDiary,
+  CreateUser,
+  SignInUser,
+  RefreshSession,
+};
