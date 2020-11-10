@@ -7,13 +7,15 @@ const Home = () => {
     <div>
       <h1 className="blue-background">Welcome to My Calorie Pal</h1>
       <div className="grid-home">
-        <div>
+        <div className="overview-wrapper">
           <ul>
-            Starting out
-            <li>one</li>
-            <li>two</li>
-            <li>three</li>
-            <li>four</li>
+            <h3>Overview</h3>
+            <h4>
+              <li className="list">Lose weight with MYCaloriePal</li>
+              <li className="list">Track Calories</li>
+              <li className="list">Track Exercise</li>
+              <li className="list">four</li>
+            </h4>
           </ul>
         </div>
         <div className="hero buttons">

@@ -1,8 +1,9 @@
 import React from "react";
 import Hero from "../components/Hero";
+import Nav from "../components/Nav";
 import "../styles/Layout.css";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, currentUser }) => {
   return (
     <div className="layout grid">
       <section className="left flex-sm img-wrapper">
@@ -12,7 +13,7 @@ const Layout = ({ children }) => {
         />
         <div className="mask flex-col">
           <div className="content-wrapper">
-            <h3 className="title">My Calorie Pal</h3>
+            <h3 className="title">MyCaloriePal</h3>
             <div className="hero-wrapper">
               <div className="cl-left flex-col">
                 <Hero />
@@ -21,7 +22,10 @@ const Layout = ({ children }) => {
           </div>
         </div>
       </section>
-      <section className="right">{children}</section>
+      <section className="right">
+        <Nav />
+        {children}
+      </section>
     </div>
   );
 };

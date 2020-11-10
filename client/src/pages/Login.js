@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import TextInput from "../components/TextInput";
+import { __LoginUser } from "../services/UserServices";
 
 class LogIn extends Component {
   constructor() {
@@ -18,8 +19,16 @@ class LogIn extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(this.state);
+    try {
+      const loginData = await __LoginUser(this.state);
+      this.props.toggleAuthenticated(true, loginData.user, () =>
+        this.props.history.push("/profile")
+      );
+    } catch (error) {
+      this.setState({ formError: true });
+    }
   };
+
   render() {
     const { email, password } = this.state;
     return (

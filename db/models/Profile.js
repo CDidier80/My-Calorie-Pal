@@ -26,6 +26,10 @@ module.exports = new Schema(
       type: String,
       required: true,
     },
+    activityLevel: {
+      type: String,
+      required: true,
+    },
     recCalIntake: {
       type: Number,
       required: true,

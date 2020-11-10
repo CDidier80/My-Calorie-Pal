@@ -9,6 +9,7 @@ const CreateProfile = async (req, res) => {
     weight: body.weight,
     goalWeight: body.goalWeight,
     weeklyGoal: body.weeklyGoal,
+    activityLevel: body.activityLevel,
     recCalIntake: body.recCalIntake,
     user_id: req.params.user_id,
   });
@@ -27,6 +28,7 @@ const UpdateProfile = async (req, res) => {
       weight: body.weight,
       goalWeight: body.goalWeight,
       weeklyGoal: body.weeklyGoal,
+      activityLevel: body.activityLevel,
       recCalIntake: body.recCalIntake,
     },
     { upsert: true, new: true }

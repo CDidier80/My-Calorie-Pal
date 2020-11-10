@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import TextInput from "../components/TextInput";
+import { __RegisterUser } from "../services/UserServices";
 import "../styles/Login.css";
 
 class SignUp extends Component {
@@ -20,7 +21,12 @@ class SignUp extends Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(this.state);
+    try {
+      await __RegisterUser(this.state);
+      this.props.history.push("/login");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   render() {

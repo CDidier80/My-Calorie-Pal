@@ -30,7 +30,7 @@ class Hero extends Component {
           <p>{quote.author}</p>
         </div>
         <div className="hero-action">
-          <Link to="/addfood">Diary</Link>
+          <Link to="/diary">Diary</Link>
         </div>
       </div>
     );
