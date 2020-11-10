@@ -1,0 +1,12 @@
+.grid-home {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.buttons {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  justify-content: center;
+}
+.spacing {
+  margin: 5em;
+}

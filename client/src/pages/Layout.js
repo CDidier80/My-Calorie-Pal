@@ -1,5 +1,4 @@
 import React from "react";
-import Nav from "../components/Nav";
 import Hero from "../components/Hero";
 import "../styles/Layout.css";
 
@@ -22,10 +21,7 @@ const Layout = ({ children }) => {
           </div>
         </div>
       </section>
-      <section className="right">
-        <Nav />
-        {children}
-      </section>
+      <section className="right">{children}</section>
     </div>
   );
 };
