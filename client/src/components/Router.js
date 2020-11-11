@@ -9,6 +9,7 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import Profile from "../pages/Profile";
+import CreateProfile from "../pages/CreateProfile";
 import Diary from "../pages/Diary";
 import AddMeal from "../pages/AddMeal";
 
@@ -74,10 +75,20 @@ class Router extends Component {
             />
             <ProtectedRoute
               authenticated={authenticated}
-              path="/profile/"
+              path="/profile"
               component={(props) => (
                 <Layout currentUser={currentUser} authenticated={authenticated}>
                   <Profile {...props} currentUser={currentUser} />
+                </Layout>
+              )}
+            />
+
+            <ProtectedRoute
+              authenticated={authenticated}
+              path="/create/profile"
+              component={(props) => (
+                <Layout currentUser={currentUser} authenticated={authenticated}>
+                  <CreateProfile {...props} currentUser={currentUser} />
                 </Layout>
               )}
             />

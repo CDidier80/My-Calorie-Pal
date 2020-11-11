@@ -1,7 +1,7 @@
 const Router = require("express").Router();
 const ProfileController = require("../controllers/ProfileController");
 
-Router.post("/:user_id", ProfileController.CreateProfile);
-Router.put("/:user_id/:profile_id", ProfileController.UpdateProfile);
+Router.get("/:user_id", ProfileController.GetProfile);
+Router.post("/create/:user_id", ProfileController.CreateProfile);
 
 module.exports = Router;

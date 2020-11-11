@@ -1,6 +1,8 @@
 const { Profile } = require("../db/schema");
 
 const CreateProfile = async (req, res) => {
+  await Profile.deleteOne({ user_id: req.params.user_id });
+
   const body = req.body;
   const profile = new Profile({
     gender: body.gender,
@@ -17,26 +19,12 @@ const CreateProfile = async (req, res) => {
   res.send(profile);
 };
 
-const UpdateProfile = async (req, res) => {
-  const body = req.body;
-  const updatedProfile = await Profile.findByIdAndUpdate(
-    req.params.profile_id,
-    {
-      gender: body.gender,
-      age: body.age,
-      height: body.height,
-      weight: body.weight,
-      goalWeight: body.goalWeight,
-      weeklyGoal: body.weeklyGoal,
-      activityLevel: body.activityLevel,
-      recCalIntake: body.recCalIntake,
-    },
-    { upsert: true, new: true }
-  );
-  res.send(updatedProfile);
+const GetProfile = async (req, res) => {
+  const profile = await Profile.findOne({ user_id: req.params.user_id });
+  res.send({ profile });
 };
 
 module.exports = {
   CreateProfile,
-  UpdateProfile,
+  GetProfile,
 };

@@ -22,7 +22,7 @@ class LogIn extends Component {
     try {
       const loginData = await __LoginUser(this.state);
       this.props.toggleAuthenticated(true, loginData.user, () =>
-        this.props.history.push("/profile")
+        this.props.history.push("/create/profile")
       );
     } catch (error) {
       this.setState({ formError: true });

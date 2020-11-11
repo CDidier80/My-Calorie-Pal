@@ -1,19 +1,21 @@
 import React from "react";
 
 const MaleActiveSwitch = (props) => {
-  const age = parseInt(props);
+  let handleRecCal = props[1];
+  const { age } = props[0];
+  let ageCheck = parseInt(age);
   switch (true) {
-    case age <= 18:
-      console.log(3000);
+    case ageCheck <= 18:
+      handleRecCal(3000);
       break;
-    case age > 18 && age <= 30:
-      console.log(3000);
+    case ageCheck > 18 && age <= 30:
+      handleRecCal(3000);
       break;
-    case age > 30 && age <= 50:
-      console.log(2900);
+    case ageCheck > 30 && age <= 50:
+      handleRecCal(2900);
       break;
-    case age > 50:
-      console.log(2600);
+    case ageCheck > 50:
+      handleRecCal(2600);
       break;
     default:
       console.log("whoops");

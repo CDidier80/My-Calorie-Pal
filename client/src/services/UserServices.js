@@ -21,7 +21,6 @@ export const __RegisterUser = async (formData) => {
 export const __CheckSession = async () => {
   try {
     const res = await ApiClient.get("/users/refresh/session");
-    // console.log(res.data);
     return res.data;
   } catch (error) {
     throw error;
