@@ -16,7 +16,13 @@ const RemoveMeal = async (req, res) => {
   res.send("deleted");
 };
 
+const GetMeal = async (req, res) => {
+  const meal = await Meal.findById(req.params.meal_id);
+  res.send({ meal });
+};
+
 module.exports = {
   CreateMeal,
   RemoveMeal,
+  GetMeal,
 };

@@ -32,6 +32,11 @@ const RemoveFood = async (req, res) => {
   res.send({ updatedMeal });
 };
 
+const GetFood = async (req, res) => {
+  const food = await Food.findById(req.params.food_id);
+  res.send({ food });
+};
+
 const UpdateFood = async (req, res) => {
   const body = req.body;
   const updatedFood = await Food.findByIdAndUpdate(
@@ -51,5 +56,6 @@ const UpdateFood = async (req, res) => {
 module.exports = {
   CreateFood,
   RemoveFood,
+  GetFood,
   UpdateFood,
 };

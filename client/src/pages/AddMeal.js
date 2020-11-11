@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import AddFood from "./AddFood";
 import TextInput from "../components/TextInput";
 
 import { __CreateMeal } from "../services/MealServices";
@@ -26,7 +27,7 @@ class AddMeal extends Component {
         this.state,
         this.props.currentUser._id
       );
-      this.setState({ mealCreated: true }, { meal_id: mealData._id });
+      this.setState({ mealCreated: true, meal_id: mealData._id });
     } catch (error) {
       throw error;
     }
@@ -39,23 +40,16 @@ class AddMeal extends Component {
 
   render() {
     const { mealCreated, description } = this.state;
-    // console.log(this.props.currentUser);
+
     return (
       <div>
         <div className="profile">
-          <form onSubmit={this.handleSubmit}>
-            {mealCreated ? (
-              <div>
-                <h3>{description}</h3>
-                <TextInput
-                  placeholder="Search food"
-                  name="food"
-                  type="text"
-                  value={description}
-                  onChange={this.handleChange}
-                />
-              </div>
-            ) : (
+          {mealCreated ? (
+            <div>
+              <AddFood meal_id={this.state.meal_id} />
+            </div>
+          ) : (
+            <form onSubmit={this.handleSubmit}>
               <div>
                 <h3>Create a Meal</h3>
                 <TextInput
@@ -66,11 +60,11 @@ class AddMeal extends Component {
                   onChange={this.handleChange}
                 />
               </div>
-            )}
-            <button className="profile-button" type="submit">
-              Submit
-            </button>
-          </form>
+              <button className="profile-button" type="submit">
+                Submit
+              </button>
+            </form>
+          )}
         </div>
       </div>
     );

@@ -12,6 +12,7 @@ import Profile from "../pages/Profile";
 import CreateProfile from "../pages/CreateProfile";
 import Diary from "../pages/Diary";
 import AddMeal from "../pages/AddMeal";
+import AddFood from "../pages/AddFood";
 
 class Router extends Component {
   constructor() {
@@ -107,6 +108,15 @@ class Router extends Component {
               component={(props) => (
                 <Layout currentUser={currentUser} authenticated={authenticated}>
                   <AddMeal {...props} currentUser={currentUser} />
+                </Layout>
+              )}
+            />
+            <ProtectedRoute
+              authenticated={authenticated}
+              path="/food"
+              component={(props) => (
+                <Layout currentUser={currentUser} authenticated={authenticated}>
+                  <AddFood {...props} currentUser={currentUser} />
                 </Layout>
               )}
             />

@@ -17,3 +17,12 @@ export const __RemoveMeal = async (mealId) => {
     throw error;
   }
 };
+
+export const __GetMeal = async (mealId) => {
+  try {
+    const res = await ApiClient.get(`/meals/${mealId}`);
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+};
