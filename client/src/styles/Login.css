@@ -6,7 +6,7 @@
   height: 60%;
   justify-content: center;
   align-items: center;
-  margin-top: 10%;
+  margin-top: 5%;
   padding: 0;
 }
 
@@ -40,8 +40,4 @@
 .login form p,
 .profile form p {
   margin: 2em 25%;
-}
-.dropdown {
-  width: 30%;
-  margin-left: 25%;
 }

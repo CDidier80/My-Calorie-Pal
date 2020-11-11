@@ -1,0 +1,25 @@
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.5em;
+  font-weight: bolder;
+}
+.info {
+  margin: 0.25em;
+}
+.profile-button {
+  margin-top: 1.5em;
+}
+.dropdown-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+}
+.dropdown {
+  width: 30%;
+}
+.goal-dropdown {
+  width: 30%;
+  align-self: center;
+  justify-self: center;
+}

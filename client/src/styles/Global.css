@@ -19,15 +19,10 @@ body {
   display: grid;
   grid-template-columns: 1fr 3fr;
 }
-.dropdown-wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.grid-rows {
+  display: flex;
+  flex-direction: column;
 }
-.dropdown {
-  margin-top: 0.5em;
-  width: 7em;
-}
-
 form input,
 form textarea {
   border: none;

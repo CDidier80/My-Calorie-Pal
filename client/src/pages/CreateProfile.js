@@ -4,22 +4,23 @@ import Dropdown from "../components/Dropdown";
 
 import MaleSwitch from "../components/MaleSwitch";
 import FemaleSwitch from "../components/FemaleSwitch";
+import WeeklyGoalSwitch from "../components/WeeklyGoalSwitch";
 
-import { __CreateProfile } from "../services/ProfileServices";
+import { __CreateProfile, __GetProfile } from "../services/ProfileServices";
 
 const options = [
-  "Lose .5 Ib a week",
-  "Lose 1 Ib a week",
-  "Lose 1.5 Ibs a week",
-  "Lose 2 Ibs a week",
-  "Gain .5 Ib a week",
-  "maintain",
-  "Gain 1 Ib a week",
-  "Gain 1.5 Ibs a week",
-  "Gain 2 Ibs a week",
+  "Lose 2 lbs a week",
+  "Lose 1.5 lbs a week",
+  "Lose 1 lb a week",
+  "Lose .5 lb a week",
+  "Maintain Current Weight",
+  "Gain .5 lb a week",
+  "Gain 1 lb a week",
+  "Gain 1.5 lbs a week",
+  "Gain 2 lbs a week",
 ];
 
-const genders = ["male", "female"];
+const genders = ["Male", "Female"];
 
 const activityLevels = ["sedentary", "moderately active", "active"];
 
@@ -35,15 +36,25 @@ class CreateProfile extends Component {
       weeklyGoal: "",
       activityLevel: "",
       recCalIntake: "",
-      profileFetchError: false,
+      formError: false,
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.getProfile();
+  }
+
+  getProfile = async () => {
+    try {
+      const profileData = await __GetProfile(this.props.currentUser._id);
+      this.setState(profileData.profile);
+    } catch (error) {
+      throw error;
+    }
+  };
 
   handleChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
-    console.log(target);
   };
 
   handleGenderDropDown = ({ label }) => {
@@ -65,8 +76,9 @@ class CreateProfile extends Component {
   createProfile = async () => {
     try {
       await __CreateProfile(this.state, this.props.currentUser._id);
+      this.props.history.push("/profile");
     } catch (error) {
-      console.log("errorrrrr");
+      this.setState({ formError: true });
     }
   };
 
@@ -74,16 +86,18 @@ class CreateProfile extends Component {
     event.preventDefault();
     const gender = this.state.gender;
 
-    if (gender === "male") {
+    if (gender === "Male") {
       MaleSwitch(this.state, this.handleRecCal);
-    } else if (gender === "female") {
+    } else if (gender === "Female") {
       FemaleSwitch(this.state, this.handleRecCal);
     }
-    setTimeout(() => this.createProfile(), 500);
+
+    setTimeout(() => WeeklyGoalSwitch(this.state, this.handleRecCal), 5);
+
+    setTimeout(() => this.createProfile(), 5);
   };
 
   render() {
-    console.log(this.props.currentUser._id);
     const {
       gender,
       age,
@@ -92,22 +106,14 @@ class CreateProfile extends Component {
       goalWeight,
       weeklyGoal,
       activityLevel,
-      recCalIntake,
+      formError,
     } = this.state;
     return (
       <div>
-        <h3>Create Profile</h3>
         <div className="profile">
           <form onSubmit={this.handleSubmit}>
             <p>Please enter in the following information</p>
             <div className="dropdown-wrapper">
-              <Dropdown
-                className="dropdown"
-                placeholder="Weekly Goal"
-                options={options}
-                value={weeklyGoal}
-                onChange={this.handleGoalDropDown}
-              />
               <Dropdown
                 className="dropdown"
                 placeholder="Gender"
@@ -151,7 +157,19 @@ class CreateProfile extends Component {
               value={goalWeight}
               onChange={this.handleChange}
             />
-            <button type="submit">Submit</button>
+            <div className="dropdown-wrapper">
+              <Dropdown
+                className="goal-dropdown"
+                placeholder="Weekly Goal"
+                options={options}
+                value={weeklyGoal}
+                onChange={this.handleGoalDropDown}
+              />
+            </div>
+            {formError ? <p>Please fill in all fields</p> : null}
+            <button className="profile-button" type="submit">
+              Submit
+            </button>
           </form>
         </div>
       </div>
