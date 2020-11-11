@@ -106,7 +106,7 @@ class Router extends Component {
               path="/meals"
               component={(props) => (
                 <Layout currentUser={currentUser} authenticated={authenticated}>
-                  <AddMeal />
+                  <AddMeal {...props} currentUser={currentUser} />
                 </Layout>
               )}
             />
