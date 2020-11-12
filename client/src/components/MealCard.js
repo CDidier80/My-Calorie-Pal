@@ -1,12 +1,23 @@
 import React from "react";
+import "../styles/Diary.css";
 
 import { __GetFood } from "../services/FoodServices";
 
-const MealCard = ({ name }) => {
-  //   console.log(props);
+const MealCard = (props) => {
+  // console.log(props);
   return (
     <div>
-      <h3>{name}</h3>
+      <div className="mealCard">
+        {props.name}: {props.calories} cals
+        <button
+          className="mealCard-button"
+          value={props.value}
+          onClick={props.onClick}
+          type="submit"
+        >
+          Remove
+        </button>
+      </div>
     </div>
   );
 };

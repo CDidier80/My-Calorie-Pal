@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import TextInput from "../components/TextInput";
 import MealCard from "../components/MealCard";
 
-import { __CreateFood, __GetFood } from "../services/FoodServices";
+import {
+  __CreateFood,
+  __GetFood,
+  __RemoveFood,
+} from "../services/FoodServices";
 import { __GetMeal } from "../services/MealServices";
 
 class AddFood extends Component {
@@ -14,9 +18,9 @@ class AddFood extends Component {
       protein: "",
       carbs: "",
       fat: "",
-      foodAdded: false,
       meal: "",
       foods: [],
+      totalCals: 0,
     };
   }
 
@@ -29,9 +33,9 @@ class AddFood extends Component {
       const mealData = await __GetMeal(this.props.meal_id);
       this.setState({
         meal: mealData.meal.description,
-        foods: mealData.meal.foods,
       });
-      this.getFood(mealData.meal.foods);
+      let i = mealData.meal.foods.length - 1;
+      this.getFood(mealData.meal.foods[i]);
     } catch (error) {
       throw error;
     }
@@ -40,10 +44,30 @@ class AddFood extends Component {
   getFood = async (food) => {
     try {
       const foodData = await __GetFood(food);
-      console.log(foodData);
+      this.setState((prevState) => ({
+        foods: [...prevState.foods, foodData.food],
+        // totalCals: (prevState.totalCals += foodData.food.calories),
+      }));
     } catch (error) {
       throw error;
     }
+  };
+
+  removeFood = async (foodId) => {
+    try {
+      await __RemoveFood(this.props.meal_id, foodId);
+      this.setState((prevState) => ({
+        foods: prevState.foods.filter((food) => food._id !== foodId),
+      }));
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  handleClick = (e) => {
+    e.preventDefault();
+    this.removeFood(e.target.value);
+    setTimeout(() => this.getTotalCals(), 50);
   };
 
   createFood = async () => {
@@ -70,6 +94,16 @@ class AddFood extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     this.createFood();
+    setTimeout(() => this.getTotalCals(), 50);
+  };
+
+  getTotalCals = () => {
+    let totalCals = 0;
+    this.setState({ totalCals: 0 });
+    this.state.foods.forEach((element) => {
+      totalCals += element.calories;
+      this.setState({ totalCals: totalCals });
+    });
   };
 
   render() {
@@ -122,14 +156,22 @@ class AddFood extends Component {
         <div>
           <div className="profile">
             <form>
-              <h3>{meal}</h3>
-              {this.state.foodAdded ? (
-                <div>
-                  {/* {this.state.foods.map((element) => ( */}
-                  {/* <MealCard key={element} name={element} /> */}
-                  {/* ))} */}
+              <h3 className="underline">{meal}</h3>
+
+              <div className="mealCard-wrapper">
+                {this.state.foods.map((element) => (
+                  <MealCard
+                    key={element._id}
+                    value={element._id}
+                    name={element.description}
+                    calories={element.calories}
+                    onClick={this.handleClick}
+                  />
+                ))}
+                <div className="total-cals">
+                  Total Cals = {this.state.totalCals}
                 </div>
-              ) : null}
+              </div>
             </form>
           </div>
         </div>

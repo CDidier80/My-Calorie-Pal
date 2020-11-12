@@ -1,6 +1,7 @@
 .signup,
 .login,
-.profile {
+.profile,
+.center {
   display: flex;
   width: 100%;
   justify-content: center;

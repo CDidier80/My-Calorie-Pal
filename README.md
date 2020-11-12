@@ -57,3 +57,4 @@ The project was deployed on ... and can be found [here](...)
 ### Credits
 
 - Api: https://www.nutritionix.com/
+- Bootstrap-React

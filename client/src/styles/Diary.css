@@ -1,0 +1,96 @@
+.mealCard-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 2em;
+}
+.mealCard {
+  font-size: 1em;
+}
+.mealCard-button {
+  padding: 0.005em 0.1em;
+}
+.total-cals {
+  margin-top: 1.25em;
+}
+
+.block {
+  display: block;
+  justify-content: center;
+}
+.table-bordered,
+.table-bordered td,
+.table-bordered th {
+  border: 1px solid #dee2e6;
+}
+.table {
+  width: 90%;
+  margin-bottom: 1rem;
+  color: #212529;
+}
+table {
+  border-collapse: collapse;
+}
+*,
+:after,
+:before {
+  box-sizing: border-box;
+}
+table {
+  display: table;
+  border-collapse: separate;
+  box-sizing: border-box;
+  border-spacing: 2px;
+  border-color: grey;
+}
+thead {
+  display: table-header-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+tr {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
+}
+.table-bordered thead td,
+.table-bordered thead th {
+  border-bottom-width: 2px;
+}
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid black;
+}
+.table-bordered,
+.table-bordered td,
+.table-bordered th {
+  border: 1px solid black;
+}
+.table td,
+.table th {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid black;
+}
+th {
+  text-align: inherit;
+  display: table-cell;
+  vertical-align: inherit;
+  font-weight: bold;
+  text-align: -internal-center;
+}
+tbody {
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+.table td,
+.table th {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid black;
+}
+td {
+  display: table-cell;
+  vertical-align: inherit;
+}

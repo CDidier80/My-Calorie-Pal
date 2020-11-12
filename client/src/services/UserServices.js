@@ -1,8 +1,8 @@
 import ApiClient from "./ApiClient";
 
-export const __GetDiary = async (userId) => {
+export const __GetDiary = async (userId, date) => {
   try {
-    const res = await ApiClient.get(`/users/${userId}`);
+    const res = await ApiClient.get(`/users/${userId}/get/${date}`);
     return res.data;
   } catch (error) {
     throw error;

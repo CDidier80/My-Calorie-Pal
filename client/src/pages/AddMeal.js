@@ -8,7 +8,7 @@ class AddMeal extends Component {
   constructor() {
     super();
     this.state = {
-      date: new Date().toLocaleDateString(),
+      date: new Date().toISOString().slice(0, 10),
       mealCreated: false,
       description: "",
       meal_id: "",
