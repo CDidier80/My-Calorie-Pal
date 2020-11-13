@@ -20,10 +20,13 @@ class Card extends Component {
       const mealData = await __GetMeal(mealId);
       this.setState({
         meal: mealData.meal,
+        food: [],
       });
-      this.state.meal.foods.forEach((element) => {
-        this.getFood(element);
-      });
+      this.state.meal
+        ? this.state.meal.foods.forEach((element) => {
+            this.getFood(element);
+          })
+        : this.setState({ clicked: false });
     } catch (error) {
       throw error;
     }
@@ -35,7 +38,6 @@ class Card extends Component {
       this.setState((prevState) => ({
         food: [...prevState.food, foodData.food],
       }));
-      console.log(this.state.food);
     } catch (error) {
       throw error;
     }
@@ -43,18 +45,27 @@ class Card extends Component {
 
   handleClick = (event) => {
     // console.log(event);
-    // this.getMeal(event);
-    this.setState({ clicked: true });
+    this.getMeal(event);
+    let clicked = this.state.clicked;
+    this.setState({ clicked: clicked ? false : true });
   };
 
   render() {
     const { clicked, food } = this.state;
-
+    const extraContent = food.map((element) => (
+      <MealCard
+        key={element._id}
+        value={element._id}
+        name={element.description}
+        calories={element.calories}
+      />
+    ));
     return (
       <td>
-        <div onClick={() => this.handleClick(this.props.value)}>
+        <a onClick={() => this.handleClick(this.props.value)}>
           {this.props.name}
-        </div>
+        </a>
+        {clicked && extraContent}
         <button
           className="mealCard-button"
           value={this.props.value}

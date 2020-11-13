@@ -9,14 +9,16 @@ const MealCard = (props) => {
     <div>
       <div className="mealCard">
         {props.name}: {props.calories} cals
-        <button
-          className="mealCard-button"
-          value={props.value}
-          onClick={props.onClick}
-          type="submit"
-        >
-          Remove
-        </button>
+        {props.onClick ? (
+          <button
+            className="mealCard-button"
+            value={props.value}
+            onClick={props.onClick}
+            type="submit"
+          >
+            Remove
+          </button>
+        ) : null}
       </div>
     </div>
   );

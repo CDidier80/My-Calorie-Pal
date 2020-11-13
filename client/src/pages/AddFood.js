@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import TextInput from "../components/TextInput";
 import MealCard from "../components/MealCard";
 
@@ -37,9 +38,11 @@ class AddFood extends Component {
       const mealData = await __GetMeal(this.props.location.state.meal_id);
       this.setState({
         name: mealData.meal.name,
+        foods: [],
       });
-      let i = mealData.meal.foods.length - 1;
-      this.getFood(mealData.meal.foods[i]);
+      mealData.meal.foods.forEach((element) => {
+        this.getFood(element);
+      });
     } catch (error) {
       throw error;
     }
@@ -47,10 +50,7 @@ class AddFood extends Component {
 
   upDateMeal = async () => {
     try {
-      const mealData = await __UpDateMeal(
-        this.state,
-        this.props.location.state.meal_id
-      );
+      await __UpDateMeal(this.state, this.props.location.state.meal_id);
     } catch (error) {
       throw error;
     }

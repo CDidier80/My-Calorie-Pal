@@ -23,7 +23,6 @@ class Profile extends Component {
   };
 
   render() {
-    // console.log(this.props.currentUser);
     const {
       age,
       gender,
@@ -44,10 +43,7 @@ class Profile extends Component {
             <div className="info"> Current Weight: {weight} </div>
             <div className="info"> Goal Weight: {goalWeight} </div>
             <div className="info"> Weekly Goal: {weeklyGoal} </div>
-            <div className="info">
-              {" "}
-              Recommended Daily Calories: {recCalIntake}{" "}
-            </div>
+            <div className="info"> Daily Calories: {recCalIntake}</div>
           </form>
           <div className="hero button">
             <div className="hero-action spacing">

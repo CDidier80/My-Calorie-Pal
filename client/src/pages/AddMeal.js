@@ -48,22 +48,24 @@ class AddMeal extends Component {
             <AddSearchFoods meal_id={this.state.meal_id} />
           </div>
         ) : (
-          <div className="profile">
-            <form onSubmit={this.handleSubmit}>
-              <div>
-                <h3>Create a Meal</h3>
-                <TextInput
-                  placeholder="Create a Meal"
-                  name="name"
-                  type="text"
-                  value={name}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <button className="profile-button" type="submit">
-                Submit
-              </button>
-            </form>
+          <div>
+            <h3>Create a Meal</h3>
+            <div className="profile">
+              <form onSubmit={this.handleSubmit}>
+                <div>
+                  <TextInput
+                    placeholder="Create a Meal"
+                    name="name"
+                    type="text"
+                    value={name}
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <button className="profile-button" type="submit">
+                  Submit
+                </button>
+              </form>
+            </div>
           </div>
         )}
       </div>
