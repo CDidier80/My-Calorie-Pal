@@ -7,7 +7,7 @@ import {
   __GetFood,
   __RemoveFood,
 } from "../services/FoodServices";
-import { __GetMeal } from "../services/MealServices";
+import { __GetMeal, __UpDateMeal } from "../services/MealServices";
 
 class AddFood extends Component {
   constructor() {
@@ -18,9 +18,13 @@ class AddFood extends Component {
       protein: "",
       carbs: "",
       fat: "",
-      meal: "",
       foods: [],
-      totalCals: 0,
+      name: "",
+      date: new Date().toISOString().slice(0, 10),
+      totalCalories: 0,
+      totalProtein: 0,
+      totalCarbs: 0,
+      totalFat: 0,
     };
   }
 
@@ -32,10 +36,18 @@ class AddFood extends Component {
     try {
       const mealData = await __GetMeal(this.props.meal_id);
       this.setState({
-        meal: mealData.meal.description,
+        name: mealData.meal.name,
       });
       let i = mealData.meal.foods.length - 1;
       this.getFood(mealData.meal.foods[i]);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  upDateMeal = async () => {
+    try {
+      const mealData = await __UpDateMeal(this.state, this.props.meal_id);
     } catch (error) {
       throw error;
     }
@@ -46,7 +58,6 @@ class AddFood extends Component {
       const foodData = await __GetFood(food);
       this.setState((prevState) => ({
         foods: [...prevState.foods, foodData.food],
-        // totalCals: (prevState.totalCals += foodData.food.calories),
       }));
     } catch (error) {
       throw error;
@@ -95,19 +106,36 @@ class AddFood extends Component {
     e.preventDefault();
     this.createFood();
     setTimeout(() => this.getTotalCals(), 50);
+    setTimeout(() => this.upDateMeal(), 100);
   };
 
   getTotalCals = () => {
-    let totalCals = 0;
-    this.setState({ totalCals: 0 });
+    let totalCalories = 0;
+    let totalProtein = 0;
+    let totalCarbs = 0;
+    let totalFat = 0;
+    this.setState({
+      totalCalories: 0,
+      totalProtein: 0,
+      totalCarbs: 0,
+      totalFat: 0,
+    });
     this.state.foods.forEach((element) => {
-      totalCals += element.calories;
-      this.setState({ totalCals: totalCals });
+      totalCalories += element.calories;
+      totalProtein += element.protein;
+      totalCarbs += element.carbs;
+      totalFat += element.fat;
+      this.setState({
+        totalCalories: totalCalories,
+        totalProtein: totalProtein,
+        totalCarbs: totalCarbs,
+        totalFat: totalFat,
+      });
     });
   };
 
   render() {
-    const { description, calories, protein, carbs, fat, meal } = this.state;
+    const { description, calories, protein, carbs, fat, name } = this.state;
     return (
       <div className="grid-food">
         <div className="profile">
@@ -156,7 +184,7 @@ class AddFood extends Component {
         <div>
           <div className="profile">
             <form>
-              <h3 className="underline">{meal}</h3>
+              <h3 className="underline">{name}</h3>
 
               <div className="mealCard-wrapper">
                 {this.state.foods.map((element) => (
@@ -169,7 +197,7 @@ class AddFood extends Component {
                   />
                 ))}
                 <div className="total-cals">
-                  Total Cals = {this.state.totalCals}
+                  Total Cals = {this.state.totalCalories}
                 </div>
               </div>
             </form>

@@ -10,7 +10,7 @@ class AddMeal extends Component {
     this.state = {
       date: new Date().toISOString().slice(0, 10),
       mealCreated: false,
-      description: "",
+      name: "",
       meal_id: "",
     };
   }
@@ -35,13 +35,11 @@ class AddMeal extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    this.state.description
-      ? this.createMeal()
-      : this.setState({ mealCreated: false });
+    this.state.name ? this.createMeal() : this.setState({ mealCreated: false });
   };
 
   render() {
-    const { mealCreated, description } = this.state;
+    const { mealCreated, name } = this.state;
 
     return (
       <div>
@@ -56,9 +54,9 @@ class AddMeal extends Component {
                 <h3>Create a Meal</h3>
                 <TextInput
                   placeholder="Create a Meal"
-                  name="description"
+                  name="name"
                   type="text"
-                  value={description}
+                  value={name}
                   onChange={this.handleChange}
                 />
               </div>

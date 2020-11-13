@@ -3,7 +3,7 @@ const { Meal } = require("../db/schema");
 const CreateMeal = async (req, res) => {
   const body = req.body;
   const meal = new Meal({
-    description: body.description,
+    name: body.name,
     date: body.date,
     user_id: req.params.user_id,
   });
@@ -21,8 +21,26 @@ const GetMeal = async (req, res) => {
   res.send({ meal });
 };
 
+const UpdateMeal = async (req, res) => {
+  const body = req.body;
+  const updatedMeal = await Meal.findByIdAndUpdate(
+    req.params.meal_id,
+    {
+      name: body.name,
+      date: body.date,
+      totalCalories: body.totalCalories,
+      totalProtein: body.totalProtein,
+      totalCarbs: body.totalCarbs,
+      totalFat: body.totalFat,
+    },
+    { upsert: true, new: true }
+  );
+  res.send(updatedMeal);
+};
+
 module.exports = {
   CreateMeal,
   RemoveMeal,
   GetMeal,
+  UpdateMeal,
 };

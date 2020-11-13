@@ -20,13 +20,25 @@ class Diary extends Component {
       meals: [],
       exercise: [],
       profile: [],
+      totalCalories: 0,
     };
   }
 
   componentDidMount() {
     this.setState({ date: new Date().toISOString().slice(0, 10) });
     setTimeout(() => this.getDiary(), 10);
+    setTimeout(() => this.getTotalCals(), 70);
   }
+
+  getTotalCals = () => {
+    let totalCalories = 0;
+    console.log("meals state:", this.state.meals);
+
+    this.state.meals.forEach((element) => {
+      totalCalories += element.totalCalories;
+      this.setState({ totalCalories: totalCalories });
+    });
+  };
 
   getDiary = async () => {
     try {
@@ -89,7 +101,7 @@ class Diary extends Component {
           </form>
         </div>
         <h5>Recommended Cals: {profile.recCalIntake}</h5>
-        <h5>Total Consumed Cals: </h5>
+        <h5>Total Consumed Cals: {this.state.totalCalories}</h5>
         <div className="center block">
           <Table className="table table-striped table-bordered table-hover">
             <thead>
@@ -105,7 +117,7 @@ class Diary extends Component {
                       <Card
                         key={element._id}
                         value={element._id}
-                        name={element.description}
+                        name={element.name}
                         onClick={this.handleClick}
                       />
                     ))

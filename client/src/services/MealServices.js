@@ -26,3 +26,12 @@ export const __GetMeal = async (mealId) => {
     throw error;
   }
 };
+
+export const __UpDateMeal = async (formData, mealId) => {
+  try {
+    const res = await ApiClient.put(`/meals/${mealId}`, formData);
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+};
