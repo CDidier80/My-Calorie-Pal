@@ -7,6 +7,9 @@ const Nav = () => {
     <header>
       <div className="icon">
         <nav>
+          <NavLink className="nav-active" to="/exercise">
+            Add Exercise
+          </NavLink>
           <NavLink className="nav-active" to="/meals">
             Add Meal
           </NavLink>

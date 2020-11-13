@@ -1,12 +1,14 @@
+import Flatpickr from "react-flatpickr";
+import "flatpickr/dist/themes/material_blue.css";
+
 import React, { Component } from "react";
-import TextInput from "../components/TextInput";
+import { __GetDiary } from "../services/UserServices";
+import { __RemoveMeal } from "../services/MealServices";
+
 import Card from "../components/Card";
 import MealCard from "../components/MealCard";
 
 import Table from "react-bootstrap/Table";
-
-import { __GetDiary } from "../services/UserServices";
-import { __RemoveMeal } from "../services/MealServices";
 
 class Diary extends Component {
   constructor() {
@@ -54,36 +56,38 @@ class Diary extends Component {
     }
   };
 
-  handleChange = ({ target }) => {
-    this.setState({ [target.name]: target.value });
-  };
-
-  handleSubmit = (e) => {
-    e.preventDefault();
+  handleChange = (event) => {
+    let dateString = event;
+    let date = new Date(dateString);
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    this.setState({ date: `${year}-${month}-${day}` });
     this.getDiary();
   };
 
   handleClick = (e) => {
     e.preventDefault();
-    console.log(e.target.value);
     this.removeMeal(e.target.value);
   };
 
   render() {
     const { date, meals, exercise, profile } = this.state;
-    console.log(profile.recCalIntake);
     return (
       <div>
-        <h3>{this.props.currentUser.name}'s Diary</h3>
-        <form className="center" onSubmit={this.handleSubmit}>
-          <TextInput
-            placeholder="YYYY-DD-MM"
-            name="date"
-            type="text"
-            value={date}
-            onChange={this.handleChange}
-          />
-        </form>
+        <div className="center">
+          <form>
+            <Flatpickr
+              placeholder={date}
+              value={date}
+              onChange={this.handleChange}
+              options={{
+                dateFormat: "Y-m-d",
+                altFormat: "Y-m-d",
+              }}
+            />
+          </form>
+        </div>
         <h5>Recommended Cals: {profile.recCalIntake}</h5>
         <h5>Total Consumed Cals: </h5>
         <div className="center block">

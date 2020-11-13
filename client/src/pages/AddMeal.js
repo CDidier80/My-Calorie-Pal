@@ -35,7 +35,9 @@ class AddMeal extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    this.createMeal();
+    this.state.description
+      ? this.createMeal()
+      : this.setState({ mealCreated: false });
   };
 
   render() {

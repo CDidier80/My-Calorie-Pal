@@ -25,6 +25,7 @@
 }
 .table {
   width: 90%;
+  margin-left: 5%;
   margin-bottom: 1rem;
   color: #212529;
 }
@@ -47,6 +48,7 @@ thead {
   display: table-header-group;
   vertical-align: middle;
   border-color: inherit;
+  font-size: 2em;
 }
 tr {
   display: table-row;
@@ -93,4 +95,11 @@ tbody {
 td {
   display: table-cell;
   vertical-align: inherit;
+}
+td:hover {
+  cursor: pointer;
+}
+td,
+button {
+  margin-top: 1em;
 }
