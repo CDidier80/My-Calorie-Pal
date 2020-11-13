@@ -34,7 +34,7 @@ class AddFood extends Component {
 
   getMeal = async () => {
     try {
-      const mealData = await __GetMeal(this.props.meal_id);
+      const mealData = await __GetMeal(this.props.location.state.meal_id);
       this.setState({
         name: mealData.meal.name,
       });
@@ -47,7 +47,10 @@ class AddFood extends Component {
 
   upDateMeal = async () => {
     try {
-      const mealData = await __UpDateMeal(this.state, this.props.meal_id);
+      const mealData = await __UpDateMeal(
+        this.state,
+        this.props.location.state.meal_id
+      );
     } catch (error) {
       throw error;
     }
@@ -66,7 +69,7 @@ class AddFood extends Component {
 
   removeFood = async (foodId) => {
     try {
-      await __RemoveFood(this.props.meal_id, foodId);
+      await __RemoveFood(this.props.location.state.meal_id, foodId);
       this.setState((prevState) => ({
         foods: prevState.foods.filter((food) => food._id !== foodId),
       }));
@@ -83,7 +86,7 @@ class AddFood extends Component {
 
   createFood = async () => {
     try {
-      await __CreateFood(this.state, this.props.meal_id);
+      await __CreateFood(this.state, this.props.location.state.meal_id);
       this.setState({
         foodAdded: true,
         description: "",

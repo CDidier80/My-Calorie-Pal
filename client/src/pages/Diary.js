@@ -1,12 +1,13 @@
 import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/material_blue.css";
+import { PieChart } from "react-minimal-pie-chart";
 
 import React, { Component } from "react";
 import { __GetDiary } from "../services/UserServices";
 import { __RemoveMeal } from "../services/MealServices";
+import { __DeleteExercise } from "../services/ExerciseServices";
 
 import Card from "../components/Card";
-import MealCard from "../components/MealCard";
 
 import Table from "react-bootstrap/Table";
 
@@ -21,22 +22,51 @@ class Diary extends Component {
       exercise: [],
       profile: [],
       totalCalories: 0,
+      totalProtein: 0,
+      totalCarbs: 0,
+      totalFat: 0,
+      totalCalsBurned: 0,
     };
   }
 
   componentDidMount() {
     this.setState({ date: new Date().toISOString().slice(0, 10) });
     setTimeout(() => this.getDiary(), 10);
-    setTimeout(() => this.getTotalCals(), 70);
+    setTimeout(() => this.getTotalCals(), 50);
+    setTimeout(() => this.getTotalCalsBurned(), 50);
   }
+
+  getTotalCalsBurned = () => {
+    let totalCalsBurned = 0;
+    this.setState({ totalCalsBurned: 0 });
+    this.state.exercise.forEach((element) => {
+      totalCalsBurned += element.calsBurned;
+      this.setState({ totalCalsBurned: totalCalsBurned });
+    });
+  };
 
   getTotalCals = () => {
     let totalCalories = 0;
-    console.log("meals state:", this.state.meals);
-
+    let totalProtein = 0;
+    let totalCarbs = 0;
+    let totalFat = 0;
+    this.setState({
+      totalCalories: 0,
+      totalProtein: 0,
+      totalCarbs: 0,
+      totalFat: 0,
+    });
     this.state.meals.forEach((element) => {
       totalCalories += element.totalCalories;
-      this.setState({ totalCalories: totalCalories });
+      totalProtein += element.totalProtein;
+      totalCarbs += element.totalCarbs;
+      totalFat += element.totalFat;
+      this.setState({
+        totalCalories: totalCalories,
+        totalProtein: totalProtein,
+        totalCarbs: totalCarbs,
+        totalFat: totalFat,
+      });
     });
   };
 
@@ -49,7 +79,7 @@ class Diary extends Component {
       this.setState({
         diaryData: diaryData,
         meals: diaryData.meals,
-        exercise: diaryData.exercise,
+        exercise: diaryData.exercises,
         profile: diaryData.profile[0],
       });
     } catch (error) {
@@ -62,6 +92,19 @@ class Diary extends Component {
       await __RemoveMeal(mealId);
       this.setState((prevState) => ({
         meals: prevState.meals.filter((meal) => meal._id !== mealId),
+      }));
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  deleteExercise = async (exerciseId) => {
+    try {
+      await __DeleteExercise(exerciseId);
+      this.setState((prevState) => ({
+        exercise: prevState.exercise.filter(
+          (exercise) => exercise._id !== exerciseId
+        ),
       }));
     } catch (error) {
       throw error;
@@ -81,10 +124,26 @@ class Diary extends Component {
   handleClick = (e) => {
     e.preventDefault();
     this.removeMeal(e.target.value);
+    this.deleteExercise(e.target.value);
+    setTimeout(() => this.getTotalCals(), 50);
+    setTimeout(() => this.getTotalCalsBurned(), 50);
   };
 
   render() {
-    const { date, meals, exercise, profile } = this.state;
+    const {
+      date,
+      meals,
+      exercise,
+      profile,
+      totalProtein,
+      totalCarbs,
+      totalFat,
+      totalCalories,
+      totalCalsBurned,
+    } = this.state;
+    let protein = Math.round((totalProtein / totalCalories) * 100 * 4);
+    let carbs = Math.round((totalCarbs / totalCalories) * 100 * 4);
+    let fat = Math.round((totalFat / totalCalories) * 100 * 9);
     return (
       <div>
         <div className="center">
@@ -101,7 +160,8 @@ class Diary extends Component {
           </form>
         </div>
         <h5>Recommended Cals: {profile.recCalIntake}</h5>
-        <h5>Total Consumed Cals: {this.state.totalCalories}</h5>
+        <h5>Total Consumed Cals: {totalCalories}</h5>
+        <h5>Total Cals Burned: {totalCalsBurned}</h5>
         <div className="center block">
           <Table className="table table-striped table-bordered table-hover">
             <thead>
@@ -139,6 +199,24 @@ class Diary extends Component {
             </tbody>
           </Table>
         </div>
+        <div className="pie-chart">
+          <div className="key">
+            <h3>Macros</h3>
+            <div className="protein"></div>
+            <div> Protein: {protein}%</div>
+            <div className="carbs"></div> <div>Carbs: {carbs}%</div>
+            <div className="fat"></div>
+            <div>Fat: {fat}%</div>
+          </div>
+          <PieChart
+            data={[
+              { title: "Protein", value: protein, color: "green" },
+              { title: "Carbs", value: carbs, color: "blue" },
+              { title: "Fat", value: fat, color: "red" },
+            ]}
+          />
+        </div>
+        ;
       </div>
     );
   }

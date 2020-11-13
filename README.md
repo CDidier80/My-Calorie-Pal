@@ -1,6 +1,6 @@
 # MyCaloriePal
 
-## Date of completion
+## Nov/16/2020
 
 ## By: David Martel
 
@@ -49,12 +49,18 @@ The project was deployed on ... and can be found [here](...)
 
 ### Future Updates
 
-- [x] ~~come up with stuff~~
-- [ ] other stuff
+- [x] ~~Add Macros~~
+- [ ] find calorie burning caculator
 
 ---
 
 ### Credits
 
-- Api: https://www.nutritionix.com/
+- Api:
+
+        • https://www.nutritionix.com/
+        • https://type.fit/api/quotes
+
 - Bootstrap-React
+- react-flatpickr
+- react-minimal-pie-chart

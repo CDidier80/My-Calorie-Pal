@@ -13,8 +13,8 @@ const Home = () => {
             <h4>
               <li className="list">Lose weight with MYCaloriePal</li>
               <li className="list">Track Calories</li>
+              <li className="list">Track Macros</li>
               <li className="list">Track Exercise</li>
-              <li className="list">four</li>
             </h4>
           </ul>
         </div>

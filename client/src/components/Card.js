@@ -1,57 +1,58 @@
 import React, { Component } from "react";
 
-import { __GetMeal } from "../services/MealServices";
+import MealCard from "./MealCard";
 
-// const Card = (props) => {
-//   console.log(props);
-//   return (
-//     <td>
-//       {props.name}{" "}
-//       <button
-//         className="mealCard-button"
-//         value={props.value}
-//         onClick={props.onClick}
-//         type="submit"
-//         onMouseEnter={props.onMouseEnter}
-//       >
-//         Remove
-//       </button>
-//     </td>
-//   );
-// };
+import { __GetMeal } from "../services/MealServices";
+import { __GetFood } from "../services/FoodServices";
 
 class Card extends Component {
   constructor() {
     super();
     this.state = {
+      clicked: false,
       meal: [],
+      food: [],
     };
   }
 
-  GetMeal = async () => {
+  getMeal = async (mealId) => {
     try {
-      const mealData = await __GetMeal(this.props.meal_id);
+      const mealData = await __GetMeal(mealId);
       this.setState({
-        meal: mealData.meal.description,
+        meal: mealData.meal,
       });
-      console.log(this.state.meal);
-      // let i = mealData.meal.foods.length - 1;
-      // this.getFood(mealData.meal.foods[i]);
+      this.state.meal.foods.forEach((element) => {
+        this.getFood(element);
+      });
     } catch (error) {
       throw error;
     }
   };
 
-  handleMouseEnter = (event) => {
-    console.log(event);
-    // this.GetMeal(event);
+  getFood = async (foodId) => {
+    try {
+      const foodData = await __GetFood(foodId);
+      this.setState((prevState) => ({
+        food: [...prevState.food, foodData.food],
+      }));
+      console.log(this.state.food);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  handleClick = (event) => {
+    // console.log(event);
+    // this.getMeal(event);
+    this.setState({ clicked: true });
   };
 
   render() {
-    console.log(this.props);
+    const { clicked, food } = this.state;
+
     return (
       <td>
-        <div onMouseEnter={() => this.handleMouseEnter(this.props.value)}>
+        <div onClick={() => this.handleClick(this.props.value)}>
           {this.props.name}
         </div>
         <button

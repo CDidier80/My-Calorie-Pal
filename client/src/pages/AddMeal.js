@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import AddFood from "./AddFood";
+import AddSearchFoods from "./AddSearchFoods";
 import TextInput from "../components/TextInput";
 
 import { __CreateMeal } from "../services/MealServices";
@@ -43,12 +43,12 @@ class AddMeal extends Component {
 
     return (
       <div>
-        <div className="profile">
-          {mealCreated ? (
-            <div>
-              <AddFood meal_id={this.state.meal_id} />
-            </div>
-          ) : (
+        {mealCreated ? (
+          <div>
+            <AddSearchFoods meal_id={this.state.meal_id} />
+          </div>
+        ) : (
+          <div className="profile">
             <form onSubmit={this.handleSubmit}>
               <div>
                 <h3>Create a Meal</h3>
@@ -64,8 +64,8 @@ class AddMeal extends Component {
                 Submit
               </button>
             </form>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     );
   }

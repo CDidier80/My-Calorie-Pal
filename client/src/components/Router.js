@@ -115,6 +115,7 @@ class Router extends Component {
             />
             <ProtectedRoute
               authenticated={authenticated}
+              exact
               path="/food"
               component={(props) => (
                 <Layout currentUser={currentUser} authenticated={authenticated}>
