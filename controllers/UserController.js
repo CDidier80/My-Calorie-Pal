@@ -7,7 +7,9 @@ const {
 
 const GetDiary = async (req, res) => {
   const user = await User.findById(req.params.user_id).select("_id name");
-  const exercises = await Exercise.find({ user_id: req.params.user_id });
+  const exercises = await Exercise.find({ user_id: req.params.user_id }).find({
+    date: req.params.date,
+  });
   const meals = await Meal.find({ user_id: req.params.user_id }).find({
     date: req.params.date,
   });

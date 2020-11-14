@@ -4,7 +4,6 @@ import "../styles/Diary.css";
 import { __GetFood } from "../services/FoodServices";
 
 const MealCard = (props) => {
-  // console.log(props);
   return (
     <div>
       <div className="mealCard">

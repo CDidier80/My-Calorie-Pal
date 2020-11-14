@@ -16,3 +16,12 @@ export const __DeleteExercise = async (exerciseId) => {
     throw error;
   }
 };
+
+export const __GetExercise = async (exerciseId) => {
+  try {
+    const res = await ApiClient.get(`/exercise/${exerciseId}`);
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+};

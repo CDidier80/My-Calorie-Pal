@@ -47,7 +47,12 @@ class AddExercise extends Component {
   createExercise = async () => {
     try {
       await __CreateExercise(this.state, this.props.currentUser._id);
-      this.setState({ description: "", calsBurned: 0 });
+      this.setState({
+        description: "",
+        calsBurned: 0,
+        activityLevel: "",
+        duration: "",
+      });
     } catch (error) {
       throw error;
     }
@@ -57,12 +62,20 @@ class AddExercise extends Component {
     this.setState({ [target.name]: target.value });
   };
 
+  getCalsBurned = (props) => {
+    this.setState({ calsBurned: props });
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
     this.state.activityLevel && this.state.duration
-      ? METCalc(this.state)
+      ? METCalc(this.state, this.getCalsBurned)
       : this.setState({ error: true });
-    // this.createExercise();
+  };
+
+  handleCreateExercise = (e) => {
+    e.preventDefault();
+    this.createExercise();
   };
 
   handleActivityDropDown = ({ label }) => {
@@ -104,9 +117,21 @@ class AddExercise extends Component {
               />
             </div>
             <button className="profile-button" type="submit">
-              Submit
+              Calculate
             </button>
             <div>
+              {calsBurned ? (
+                <div>
+                  <h4>Calories Burned: {calsBurned}</h4>
+                  <button
+                    onClick={this.createExercise}
+                    className="profile-button"
+                    type="submit"
+                  >
+                    Add Exercise
+                  </button>
+                </div>
+              ) : null}
               {this.state.error ? <p>Please fill in all fields</p> : null}
             </div>
           </form>

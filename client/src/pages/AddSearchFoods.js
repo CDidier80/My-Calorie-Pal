@@ -1,7 +1,8 @@
 import Axios from "axios";
 import React, { Component } from "react";
 import TextInput from "../components/TextInput";
-import MealCard from "../components/MealCard";
+
+import Table from "react-bootstrap/Table";
 
 import {
   __CreateFood,
@@ -11,8 +12,12 @@ import {
 import { __GetMeal, __UpDateMeal } from "../services/MealServices";
 import { Link } from "react-router-dom";
 
-const APP_ID = "93f97d03";
-const APP_KEY = "d4fb8ea2d811ae360f008245276e8b60";
+require("dotenv").config();
+
+// const APP_ID = "93f97d03";
+const APP_ID = process.env.REACT_APP_ID;
+// const APP_KEY = "d4fb8ea2d811ae360f008245276e8b60";
+const APP_KEY = process.env.REACT_APP_KEY;
 
 class AddSearchFoods extends Component {
   constructor() {
@@ -56,7 +61,7 @@ class AddSearchFoods extends Component {
 
   upDateMeal = async () => {
     try {
-      const mealData = await __UpDateMeal(this.state, this.props.meal_id);
+      await __UpDateMeal(this.state, this.props.meal_id);
     } catch (error) {
       throw error;
     }
@@ -148,10 +153,6 @@ class AddSearchFoods extends Component {
     this.state.description
       ? this.searchFood() && this.setState({ searched: true })
       : this.setState({ searched: false });
-  };
-
-  handleAddFood = (e) => {
-    e.preventDefault();
     this.state.tag_id
       ? setTimeout(() => this.createFood(), 20) &&
         setTimeout(() => this.getTotalCals(), 100) &&
@@ -192,15 +193,8 @@ class AddSearchFoods extends Component {
   };
 
   render() {
-    const {
-      description,
-      name,
-      calories,
-      protein,
-      carbs,
-      fat,
-      searched,
-    } = this.state;
+    const { description, name } = this.state;
+
     return (
       <div>
         <button>
@@ -217,7 +211,7 @@ class AddSearchFoods extends Component {
             </Link>
           }
         </button>
-        <div className="grid-food">
+        <div>
           <div className="center profile stack">
             <form onSubmit={this.handleSubmit}>
               <h3>Search food</h3>
@@ -231,44 +225,50 @@ class AddSearchFoods extends Component {
               <button className="profile-button" type="submit">
                 Search
               </button>
-              {searched ? (
-                <div>
-                  <h4>Calories: {calories}</h4>
-                  <h4>Protein: {protein}</h4>
-                  <h4>Carbs: {carbs}</h4>
-                  <h4>Fat: {fat}</h4>
-                  <button
-                    className="profile-button"
-                    type="submit"
-                    onClick={this.handleAddFood}
-                  >
-                    Add Food
-                  </button>
-                </div>
-              ) : null}
             </form>
           </div>
-          <div>
-            <div className="profile">
-              <form>
-                <h3 className="underline">{name}</h3>
-
-                <div className="mealCard-wrapper">
-                  {this.state.foods.map((element) => (
-                    <MealCard
-                      key={element._id}
-                      value={element._id}
-                      name={element.description}
-                      calories={element.calories}
-                      onClick={this.handleClick}
-                    />
-                  ))}
-                  <div className="total-cals">
-                    Total Cals = {this.state.totalCalories}
-                  </div>
-                </div>
-              </form>
-            </div>
+          <div className="center block">
+            <Table className="table table-striped table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>{name}</th>
+                  <th>Food Item</th>
+                  <th>Calories</th>
+                  <th>Protein</th>
+                  <th>Carbs</th>
+                  <th>Fat</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.foods.map((element) => (
+                  <tr key={element._id}>
+                    <td>
+                      <button
+                        className="mealCard-button"
+                        value={element._id}
+                        onClick={this.handleClick}
+                        type="submit"
+                      >
+                        Remove
+                      </button>
+                    </td>
+                    <td>{element.description}</td>
+                    <td>{element.calories} </td>
+                    <td>{element.protein}</td>
+                    <td>{element.carbs}</td>
+                    <td>{element.fat}</td>
+                  </tr>
+                ))}
+                <tr>
+                  <td></td>
+                  <td>Totals</td>
+                  <td>{this.state.totalCalories}</td>
+                  <td>{this.state.totalProtein}</td>
+                  <td>{this.state.totalCarbs}</td>
+                  <td>{this.state.totalFat}</td>
+                </tr>
+              </tbody>
+            </Table>
           </div>
         </div>
       </div>

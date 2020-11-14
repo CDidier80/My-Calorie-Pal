@@ -119,6 +119,8 @@ class Diary extends Component {
     let year = date.getFullYear();
     this.setState({ date: `${year}-${month}-${day}` });
     this.getDiary();
+    setTimeout(() => this.getTotalCals(), 50);
+    setTimeout(() => this.getTotalCalsBurned(), 50);
   };
 
   handleClick = (e) => {

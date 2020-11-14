@@ -1,16 +1,11 @@
 import React from "react";
 
-// MET*weight in kg=calories/hour
-// Light = 3 MET
-// Moderate = 5 MET
-// Vigorous = 7 MET
+const METCalc = (...props) => {
+  const { weight, activityLevel, duration } = props[0];
+  const getCalsBurned = props[1];
+  const kgs = weight * 0.45359237;
 
-const METCalc = (props) => {
-  //   console.log(props);
-  const { weight, activityLevel, duration } = props;
-  //   const { weight, activityLevel, duration } = this.props;
-  //   console.log(weight, activityLevel, duration);
-  //   const kgs = weight * 0.45359237;
+  let time = 0;
   let MET = 0;
   switch (true) {
     case activityLevel === "Light":
@@ -25,12 +20,32 @@ const METCalc = (props) => {
     default:
       console.log("error");
   }
-  console.log(MET);
-  return (
-    <div>
-      <h1>Calc</h1>
-    </div>
-  );
+
+  switch (true) {
+    case duration === "15 mins":
+      time = 15;
+      break;
+    case duration === "30 mins":
+      time = 30;
+      break;
+    case duration === "45 mins":
+      time = 45;
+      break;
+    case duration === "1 hour":
+      time = 60;
+      break;
+    case duration === "1.5 hours":
+      time = 90;
+      break;
+    case duration === "2 hours":
+      time = 120;
+      break;
+    default:
+      console.log("error");
+  }
+
+  let calsBurned = (time * (MET * 3.5 * kgs)) / 200;
+  getCalsBurned(Math.round(calsBurned));
 };
 
 export default METCalc;

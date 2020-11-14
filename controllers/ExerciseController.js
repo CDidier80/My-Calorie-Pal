@@ -5,6 +5,8 @@ const CreateExercise = async (req, res) => {
   const exercise = new Exercise({
     description: body.description,
     calsBurned: body.calsBurned,
+    activityLevel: body.activityLevel,
+    duration: body.duration,
     date: body.date,
     user_id: req.params.user_id,
   });
@@ -17,7 +19,13 @@ const RemoveExercise = async (req, res) => {
   res.send("deleted");
 };
 
+const GetExercise = async (req, res) => {
+  const exercise = await Exercise.findById(req.params.exercise_id);
+  res.send({ exercise });
+};
+
 module.exports = {
   CreateExercise,
   RemoveExercise,
+  GetExercise,
 };

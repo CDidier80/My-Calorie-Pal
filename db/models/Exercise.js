@@ -10,6 +10,14 @@ module.exports = new Schema(
       type: Number,
       required: true,
     },
+    activityLevel: {
+      type: String,
+      required: true,
+    },
+    duration: {
+      type: String,
+      required: true,
+    },
     date: {
       type: String,
       required: true,

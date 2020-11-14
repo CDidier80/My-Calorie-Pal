@@ -31,6 +31,7 @@
 }
 table {
   border-collapse: collapse;
+  background-color: #3c6faa;
 }
 *,
 :after,
@@ -49,11 +50,13 @@ thead {
   vertical-align: middle;
   border-color: inherit;
   font-size: 2em;
+  background-color: white;
 }
 tr {
   display: table-row;
   vertical-align: inherit;
   border-color: inherit;
+  background-color: white;
 }
 .table-bordered thead td,
 .table-bordered thead th {
