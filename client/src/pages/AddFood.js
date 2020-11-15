@@ -43,6 +43,7 @@ class AddFood extends Component {
       mealData.meal.foods.forEach((element) => {
         this.getFood(element);
       });
+      setTimeout(() => this.getTotalCals(), 100);
     } catch (error) {
       throw error;
     }
@@ -50,7 +51,17 @@ class AddFood extends Component {
 
   upDateMeal = async () => {
     try {
-      await __UpDateMeal(this.state, this.props.location.state.meal_id);
+      const mealData = await __UpDateMeal(
+        this.state,
+        this.props.location.state.meal_id
+      );
+      this.setState({
+        name: mealData.name,
+        foods: [],
+      });
+      mealData.foods.forEach((element) => {
+        this.getFood(element);
+      });
     } catch (error) {
       throw error;
     }
@@ -73,15 +84,10 @@ class AddFood extends Component {
       this.setState((prevState) => ({
         foods: prevState.foods.filter((food) => food._id !== foodId),
       }));
+      this.upDateMeal();
     } catch (error) {
       throw error;
     }
-  };
-
-  handleClick = (e) => {
-    e.preventDefault();
-    this.removeFood(e.target.value);
-    setTimeout(() => this.getTotalCals(), 50);
   };
 
   createFood = async () => {
@@ -95,10 +101,17 @@ class AddFood extends Component {
         carbs: "",
         fat: "",
       });
-      this.getMeal();
+      setTimeout(() => this.upDateMeal(), 50);
+      setTimeout(() => this.getTotalCals(), 500);
     } catch (error) {
       throw error;
     }
+  };
+
+  handleClick = (e) => {
+    e.preventDefault();
+    this.removeFood(e.target.value);
+    setTimeout(() => this.getTotalCals(), 50);
   };
 
   handleChange = ({ target }) => {
@@ -107,9 +120,15 @@ class AddFood extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    this.createFood();
-    setTimeout(() => this.upDateMeal(), 100);
-    setTimeout(() => this.getTotalCals(), 50);
+    if (
+      this.state.description &&
+      this.state.calories &&
+      this.state.protein &&
+      this.state.carbs &&
+      this.state.fat
+    ) {
+      this.createFood();
+    }
   };
 
   getTotalCals = () => {
@@ -141,9 +160,9 @@ class AddFood extends Component {
     const { description, calories, protein, carbs, fat, name } = this.state;
     return (
       <div>
+        <h3>Add food</h3>
         <div className="profile">
           <form onSubmit={this.handleSubmit}>
-            <h3>Add food</h3>
             <TextInput
               placeholder="Food Item"
               name="description"
@@ -151,34 +170,36 @@ class AddFood extends Component {
               value={description}
               onChange={this.handleChange}
             />
-            <TextInput
-              placeholder="Calories"
-              name="calories"
-              type="text"
-              value={calories}
-              onChange={this.handleChange}
-            />
-            <TextInput
-              placeholder="Protein"
-              name="protein"
-              type="text"
-              value={protein}
-              onChange={this.handleChange}
-            />
-            <TextInput
-              placeholder="Carbs"
-              name="carbs"
-              type="text"
-              value={carbs}
-              onChange={this.handleChange}
-            />
-            <TextInput
-              placeholder="Fat"
-              name="fat"
-              type="text"
-              value={fat}
-              onChange={this.handleChange}
-            />
+            <div className="grid-food">
+              <TextInput
+                placeholder="Calories"
+                name="calories"
+                type="number"
+                value={calories}
+                onChange={this.handleChange}
+              />
+              <TextInput
+                placeholder="Protein"
+                name="protein"
+                type="number"
+                value={protein}
+                onChange={this.handleChange}
+              />
+              <TextInput
+                placeholder="Carbs"
+                name="carbs"
+                type="number"
+                value={carbs}
+                onChange={this.handleChange}
+              />
+              <TextInput
+                placeholder="Fat"
+                name="fat"
+                type="number"
+                value={fat}
+                onChange={this.handleChange}
+              />
+            </div>
             <button className="profile-button" type="submit">
               Submit
             </button>

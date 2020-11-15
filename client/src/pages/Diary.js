@@ -57,16 +57,18 @@ class Diary extends Component {
       totalFat: 0,
     });
     this.state.meals.forEach((element) => {
-      totalCalories += element.totalCalories;
-      totalProtein += element.totalProtein;
-      totalCarbs += element.totalCarbs;
-      totalFat += element.totalFat;
-      this.setState({
-        totalCalories: totalCalories,
-        totalProtein: totalProtein,
-        totalCarbs: totalCarbs,
-        totalFat: totalFat,
-      });
+      if (element.totalCalories) {
+        totalCalories += element.totalCalories;
+        totalProtein += element.totalProtein;
+        totalCarbs += element.totalCarbs;
+        totalFat += element.totalFat;
+        this.setState({
+          totalCalories: totalCalories,
+          totalProtein: totalProtein,
+          totalCarbs: totalCarbs,
+          totalFat: totalFat,
+        });
+      }
     });
   };
 
@@ -161,8 +163,11 @@ class Diary extends Component {
             />
           </form>
         </div>
-        <h5>Recommended Cals: {profile.recCalIntake}</h5>
-        <h5>Total Consumed Cals: {totalCalories}</h5>
+        <h5>
+          Recommended Cals: {profile.recCalIntake} - Consumed Cals:{" "}
+          {totalCalories} = Calories Remaining:{" "}
+          {profile.recCalIntake - totalCalories}
+        </h5>
         <h5>Total Cals Burned: {totalCalsBurned}</h5>
         <div className="center block">
           <Table className="table table-striped table-bordered table-hover">

@@ -12,11 +12,7 @@ import {
 import { __GetMeal, __UpDateMeal } from "../services/MealServices";
 import { Link } from "react-router-dom";
 
-require("dotenv").config();
-
-// const APP_ID = "93f97d03";
 const APP_ID = process.env.REACT_APP_ID;
-// const APP_KEY = "d4fb8ea2d811ae360f008245276e8b60";
 const APP_KEY = process.env.REACT_APP_KEY;
 
 class AddSearchFoods extends Component {
@@ -36,7 +32,6 @@ class AddSearchFoods extends Component {
       totalProtein: 0,
       totalCarbs: 0,
       totalFat: 0,
-      searched: false,
     };
   }
 
@@ -54,6 +49,7 @@ class AddSearchFoods extends Component {
       mealData.meal.foods.forEach((element) => {
         this.getFood(element);
       });
+      setTimeout(() => this.getTotalCals(), 100);
     } catch (error) {
       throw error;
     }
@@ -61,7 +57,14 @@ class AddSearchFoods extends Component {
 
   upDateMeal = async () => {
     try {
-      await __UpDateMeal(this.state, this.props.meal_id);
+      const mealData = await __UpDateMeal(this.state, this.props.meal_id);
+      this.setState({
+        name: mealData.name,
+        foods: [],
+      });
+      mealData.foods.forEach((element) => {
+        this.getFood(element);
+      });
     } catch (error) {
       throw error;
     }
@@ -89,7 +92,8 @@ class AddSearchFoods extends Component {
         carbs: "",
         fat: "",
       });
-      this.getMeal();
+      setTimeout(() => this.upDateMeal(), 50);
+      setTimeout(() => this.getTotalCals(), 500);
     } catch (error) {
       throw error;
     }
@@ -101,6 +105,7 @@ class AddSearchFoods extends Component {
       this.setState((prevState) => ({
         foods: prevState.foods.filter((food) => food._id !== foodId),
       }));
+      this.upDateMeal();
     } catch (error) {
       throw error;
     }
@@ -139,6 +144,9 @@ class AddSearchFoods extends Component {
         carbs: data.nf_total_carbohydrate,
         fat: data.nf_total_fat,
       });
+      if (this.state.tag_id) {
+        this.createFood();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -150,15 +158,9 @@ class AddSearchFoods extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.state.description
-      ? this.searchFood() && this.setState({ searched: true })
-      : this.setState({ searched: false });
-    this.state.tag_id
-      ? setTimeout(() => this.createFood(), 20) &&
-        setTimeout(() => this.getTotalCals(), 100) &&
-        setTimeout(() => this.upDateMeal(), 100) &&
-        this.setState({ searched: false })
-      : this.setState({ searched: false });
+    if (this.state.description) {
+      this.searchFood();
+    }
   };
 
   handleClick = (e) => {
