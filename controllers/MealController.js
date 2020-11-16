@@ -38,7 +38,7 @@ const UpdateMeal = async (req, res) => {
   res.send(updatedMeal);
 };
 
-const GetPreviosMeals = async (req, res) => {
+const GetPreviousMeals = async (req, res) => {
   const meals = await Meal.find({ user_id: req.params.user_id }).find({
     date: req.params.date,
   });
@@ -66,6 +66,6 @@ module.exports = {
   RemoveMeal,
   GetMeal,
   UpdateMeal,
-  GetPreviosMeals,
+  GetPreviousMeals,
   RecreateMeal,
 };

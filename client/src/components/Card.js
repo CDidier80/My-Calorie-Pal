@@ -18,6 +18,11 @@ class Card extends Component {
     };
   }
 
+  componentDidMount() {
+    this.getMeal(this.props.value);
+    this.getExercise(this.props.value);
+  }
+
   recreateMeal = async () => {
     try {
       await __RecreateMeal(this.state.meal, this.props.currentUser._id);
@@ -64,9 +69,7 @@ class Card extends Component {
     }
   };
 
-  handleClick = (event) => {
-    this.getExercise(event);
-    this.getMeal(event);
+  handleClick = () => {
     this.setState({ clicked: !this.state.clicked });
   };
 
@@ -76,6 +79,7 @@ class Card extends Component {
   };
 
   render() {
+    console.log(this.props);
     const { clicked, food, exercise } = this.state;
 
     const foodContent = food.map((element) => (
@@ -89,30 +93,36 @@ class Card extends Component {
 
     return (
       <td>
-        <a onClick={() => this.handleClick(this.props.value)}>
-          {this.props.name}
-        </a>
-        {clicked && foodContent}
-        {clicked && exercise ? (
-          <ExerciseCard
-            calsBurned={exercise.calsBurned}
-            activityLevel={exercise.activityLevel}
-            duration={exercise.duration}
-          />
-        ) : null}
-        {clicked && this.props.onClick ? (
-          <button
-            className="mealCard-button"
-            value={this.props.value}
-            onClick={this.props.onClick}
-            type="submit"
-          >
-            Remove
-          </button>
-        ) : null}
-        {clicked && !this.props.onClick ? (
-          <button onClick={this.handleRecreateMeal}>Add Meal</button>
-        ) : null}
+        {this.props.onClick ? (
+          <div>
+            <a onClick={this.handleClick}>{this.props.name}</a>
+            {clicked && foodContent}
+            {clicked && exercise ? (
+              <ExerciseCard
+                calsBurned={exercise.calsBurned}
+                activityLevel={exercise.activityLevel}
+                duration={exercise.duration}
+              />
+            ) : null}
+            {clicked && this.props.onClick ? (
+              <button
+                value={this.props.value}
+                onClick={this.props.onClick}
+                type="submit"
+              >
+                Remove
+              </button>
+            ) : null}
+          </div>
+        ) : (
+          <div>
+            <div>{this.state.meal.name}</div>
+            {foodContent}
+            <button className="recreate" onClick={this.handleRecreateMeal}>
+              Add Meal to Today
+            </button>
+          </div>
+        )}
       </td>
     );
   }

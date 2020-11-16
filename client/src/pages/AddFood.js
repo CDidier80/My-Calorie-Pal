@@ -157,7 +157,6 @@ class AddFood extends Component {
     const { description, calories, protein, carbs, fat, name } = this.state;
     return (
       <div>
-        <h3>Add food</h3>
         <div className="profile">
           <form onSubmit={this.handleSubmit}>
             <TextInput

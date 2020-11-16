@@ -207,7 +207,7 @@ class AddSearchFoods extends Component {
     return (
       <div>
         <button onClick={this.handleRenderChange}>
-          {this.state.clicked ? (
+          {this.state.render ? (
             <div>Search Foods</div>
           ) : (
             <div>Add nutritional info manually</div>
@@ -219,7 +219,6 @@ class AddSearchFoods extends Component {
           <div>
             <div className="center profile stack">
               <form onSubmit={this.handleSubmit}>
-                <h3>Search food</h3>
                 <TextInput
                   placeholder="Search Food"
                   name="description"

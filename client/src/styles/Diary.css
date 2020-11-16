@@ -8,7 +8,7 @@
   font-size: 0.7em;
 }
 .mealCard-button {
-  padding: 0.005em 0.1em;
+  padding: 0.05em 0.5em;
 }
 .total-cals {
   margin-top: 1.25em;
@@ -130,4 +130,11 @@ button {
 }
 .key {
   margin-right: 10%;
+}
+#prev-meals {
+  width: 30%;
+  margin-left: 35%;
+}
+.recreate {
+  margin-left: 1.5em;
 }

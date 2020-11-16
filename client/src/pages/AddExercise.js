@@ -68,9 +68,12 @@ class AddExercise extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.state.activityLevel && this.state.duration
-      ? METCalc(this.state, this.getCalsBurned)
-      : this.setState({ error: true });
+    if (this.state.activityLevel && this.state.duration) {
+      this.setState({ error: false });
+      METCalc(this.state, this.getCalsBurned);
+    } else {
+      this.setState({ error: true });
+    }
   };
 
   handleCreateExercise = (e) => {
@@ -90,7 +93,6 @@ class AddExercise extends Component {
     const { description, calsBurned, activityLevel, duration } = this.state;
     return (
       <div>
-        <h3>Add Exercise</h3>
         <div className="profile">
           <form onSubmit={this.handleSubmit}>
             <TextInput

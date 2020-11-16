@@ -51,7 +51,6 @@ class AddMeal extends Component {
           </div>
         ) : (
           <div>
-            <h3>Create a Meal</h3>
             <div className="profile">
               <form onSubmit={this.handleSubmit}>
                 <div>

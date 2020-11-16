@@ -18,14 +18,12 @@ class PreviousMeals extends Component {
   }
 
   componentDidMount() {
-    // const today = new Date();
-    // const yesterday = new Date(today);
+    const yesterday = new Date();
 
-    // yesterday.setDate(yesterday.getDate() - 1);
-
-    // today.toDateString();
-    // this.setState({ date: yesterday.toDateString() });
-    // const today = new Date().toISOString().slice(0, 10);
+    let day = yesterday.getDate() - 1;
+    let month = yesterday.getMonth() + 1;
+    let year = yesterday.getFullYear();
+    this.setState({ date: `${year}-${month}-${day}` });
 
     this.getPreviousMeals();
   }
@@ -50,8 +48,6 @@ class PreviousMeals extends Component {
     let year = date.getFullYear();
     this.setState({ date: `${year}-${month}-${day}` });
     this.getPreviousMeals();
-    // setTimeout(() => this.getTotalCals(), 50);
-    // setTimeout(() => this.getTotalCalsBurned(), 50);
   };
 
   render() {
@@ -60,6 +56,7 @@ class PreviousMeals extends Component {
       <div>
         <div className="center">
           <form>
+            <h5>Search Recent Meals</h5>
             <Flatpickr
               placeholder={date}
               value={date}
@@ -72,26 +69,23 @@ class PreviousMeals extends Component {
           </form>
         </div>
         <div className="center block">
-          <Table className="table table-striped table-bordered table-hover">
-            {/* <thead>
-              <tr>
-                <td>Previous Meals</td>
-              </tr>
-            </thead> */}
+          <Table
+            id="prev-meals"
+            className="table table-striped table-bordered table-hover"
+          >
             <tbody>
-              <tr>
-                {meals
-                  ? meals.map((element) => (
+              {meals
+                ? meals.map((element) => (
+                    <tr>
                       <Card
                         currentUser={this.props.currentUser}
                         key={element._id}
                         value={element._id}
                         name={element.name}
-                        // onClick={this.handleClick}
                       />
-                    ))
-                  : null}
-              </tr>
+                    </tr>
+                  ))
+                : null}
             </tbody>
           </Table>
         </div>
