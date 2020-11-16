@@ -37,25 +37,8 @@ const GetFood = async (req, res) => {
   res.send({ food });
 };
 
-const UpdateFood = async (req, res) => {
-  const body = req.body;
-  const updatedFood = await Food.findByIdAndUpdate(
-    req.params.food_id,
-    {
-      description: body.description,
-      calories: body.calories,
-      protein: body.protein,
-      carbs: body.carbs,
-      fat: body.fat,
-    },
-    { upsert: true, new: true }
-  );
-  res.send(updatedFood);
-};
-
 module.exports = {
   CreateFood,
   RemoveFood,
   GetFood,
-  UpdateFood,
 };
