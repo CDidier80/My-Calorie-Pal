@@ -1,6 +1,7 @@
 import Axios from "axios";
 import React, { Component } from "react";
 import TextInput from "../components/TextInput";
+import AddFood from "./AddFood";
 
 import Table from "react-bootstrap/Table";
 
@@ -10,7 +11,6 @@ import {
   __RemoveFood,
 } from "../services/FoodServices";
 import { __GetMeal, __UpDateMeal } from "../services/MealServices";
-import { Link } from "react-router-dom";
 
 const APP_ID = process.env.REACT_APP_ID;
 const APP_KEY = process.env.REACT_APP_KEY;
@@ -32,6 +32,7 @@ class AddSearchFoods extends Component {
       totalProtein: 0,
       totalCarbs: 0,
       totalFat: 0,
+      render: false,
     };
   }
 
@@ -194,85 +195,88 @@ class AddSearchFoods extends Component {
     });
   };
 
+  handleRenderChange = (e) => {
+    e.preventDefault();
+    this.setState({ render: !this.state.render });
+    this.getMeal();
+  };
+
   render() {
     const { description, name } = this.state;
 
     return (
       <div>
-        <button>
-          {
-            <Link
-              to={{
-                pathname: "/food",
-                state: {
-                  meal_id: this.props.meal_id,
-                },
-              }}
-            >
-              Add nutritional info manually
-            </Link>
-          }
+        <button onClick={this.handleRenderChange}>
+          {this.state.clicked ? (
+            <div>Search Foods</div>
+          ) : (
+            <div>Add nutritional info manually</div>
+          )}
         </button>
-        <div>
-          <div className="center profile stack">
-            <form onSubmit={this.handleSubmit}>
-              <h3>Search food</h3>
-              <TextInput
-                placeholder="Search Food"
-                name="description"
-                type="text"
-                value={description}
-                onChange={this.handleChange}
-              />
-              <button className="profile-button" type="submit">
-                Search
-              </button>
-            </form>
-          </div>
-          <div className="center block">
-            <Table className="table table-striped table-bordered table-hover">
-              <thead>
-                <tr>
-                  <th>{name}</th>
-                  <th>Food Item</th>
-                  <th>Calories</th>
-                  <th>Protein</th>
-                  <th>Carbs</th>
-                  <th>Fat</th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.state.foods.map((element) => (
-                  <tr key={element._id}>
-                    <td>
-                      <button
-                        className="mealCard-button"
-                        value={element._id}
-                        onClick={this.handleClick}
-                        type="submit"
-                      >
-                        Remove
-                      </button>
-                    </td>
-                    <td>{element.description}</td>
-                    <td>{element.calories} </td>
-                    <td>{element.protein}</td>
-                    <td>{element.carbs}</td>
-                    <td>{element.fat}</td>
+        {this.state.render ? (
+          <AddFood meal_id={this.props.meal_id} />
+        ) : (
+          <div>
+            <div className="center profile stack">
+              <form onSubmit={this.handleSubmit}>
+                <h3>Search food</h3>
+                <TextInput
+                  placeholder="Search Food"
+                  name="description"
+                  type="text"
+                  value={description}
+                  onChange={this.handleChange}
+                />
+                <button className="profile-button" type="submit">
+                  Search
+                </button>
+              </form>
+            </div>
+            <div className="center block">
+              <Table className="table table-striped table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th>{name}</th>
+                    <th>Food Item</th>
+                    <th>Calories</th>
+                    <th>Protein</th>
+                    <th>Carbs</th>
+                    <th>Fat</th>
                   </tr>
-                ))}
-                <tr>
-                  <td></td>
-                  <td>Totals</td>
-                  <td>{this.state.totalCalories}</td>
-                  <td>{this.state.totalProtein}</td>
-                  <td>{this.state.totalCarbs}</td>
-                  <td>{this.state.totalFat}</td>
-                </tr>
-              </tbody>
-            </Table>
+                </thead>
+                <tbody>
+                  {this.state.foods.map((element) => (
+                    <tr key={element._id}>
+                      <td>
+                        <button
+                          className="mealCard-button"
+                          value={element._id}
+                          onClick={this.handleClick}
+                          type="submit"
+                        >
+                          Remove
+                        </button>
+                      </td>
+                      <td>{element.description}</td>
+                      <td>{element.calories} </td>
+                      <td>{element.protein}</td>
+                      <td>{element.carbs}</td>
+                      <td>{element.fat}</td>
+                    </tr>
+                  ))}
+                  <tr>
+                    <td></td>
+                    <td>Totals</td>
+                    <td>{this.state.totalCalories}</td>
+                    <td>{this.state.totalProtein}</td>
+                    <td>{this.state.totalCarbs}</td>
+                    <td>{this.state.totalFat}</td>
+                  </tr>
+                </tbody>
+              </Table>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     );
   }

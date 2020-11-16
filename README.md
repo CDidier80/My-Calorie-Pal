@@ -50,7 +50,8 @@ The project was deployed on ... and can be found [here](...)
 ### Future Updates
 
 - [x] ~~Add Macros~~
-- [ ] find calorie burning caculator
+- [x] ~~find calorie burning caculator~~
+- [ ] save meals that user can reuese
 
 ---
 
