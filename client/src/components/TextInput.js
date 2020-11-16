@@ -4,7 +4,7 @@ const TextInput = (props) => {
   return (
     <div>
       <div className="text-input">
-        <div className="title">{props.title ? `${props.title}:` : null}</div>
+        {props.title ? <div className="text-title">{props.title}:</div> : null}
         <input
           type={props.type}
           name={props.name}

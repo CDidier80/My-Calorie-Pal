@@ -74,6 +74,7 @@ button {
   justify-content: center;
   align-items: center;
 }
-.title {
+.text-title {
   font-weight: 650;
+  margin-bottom: -4em;
 }
