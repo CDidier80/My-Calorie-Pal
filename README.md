@@ -31,7 +31,7 @@
 
 ### Full Entity Relationship Diagram
 
-![Image of ERD](https://lucid.app/publicSegments/view/f5eab582-21d1-4e43-9f7f-f3f3a232455c/image.png)
+![Image of ERD](https://lucid.app/invitations/accept/851f77e9-7a46-4d3f-8341-8ae8ed007d82)
 
 ---
 
