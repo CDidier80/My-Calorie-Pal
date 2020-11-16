@@ -105,14 +105,14 @@ class AddExercise extends Component {
             <div className="dropdown-wrapper">
               <Dropdown
                 className="dropdown"
-                placeholder="Activity Level"
+                placeholder="Intensity"
                 options={activityLevels}
                 value={activityLevel}
                 onChange={this.handleActivityDropDown}
               />
               <Dropdown
                 className="dropdown"
-                placeholder="Exercise Duration"
+                placeholder="Duration"
                 options={Duration}
                 value={duration}
                 onChange={this.handleDurationDropDown}

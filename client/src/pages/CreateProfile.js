@@ -93,11 +93,19 @@ class CreateProfile extends Component {
     }
 
     setTimeout(() => WeeklyGoalSwitch(this.state, this.handleRecCal), 5);
-    if (this.state.recCalIntake && this.state.weight) {
-      setTimeout(() => this.createProfile(), 5);
-    } else {
-      this.setState({ formError: true });
-    }
+    setTimeout(() => {
+      if (
+        this.state.recCalIntake &&
+        this.state.weight &&
+        this.state.goalWeight &&
+        this.state.height &&
+        this.state.weeklyGoal
+      ) {
+        this.createProfile();
+      } else {
+        this.setState({ formError: true });
+      }
+    }, 10);
   };
 
   render() {
