@@ -11,12 +11,11 @@ const Home = () => {
           <ul>
             <h3 className="underline">Lose weight with MyCaloriePal</h3>
             <h4 className="grid-home">
-              <li className="list">Log meals/food consumed</li>
-              <li className="list">Save Meals</li>
-              <li className="list">Track Calories</li>
+              <li className="list">Log Meals/Food consumed</li>
+              <li className="list">Log Exercises</li>
+              <li className="list">Count Calories</li>
               <li className="list">Track Calories Burned</li>
               <li className="list">Track Macros</li>
-              <li className="list">Log Exercises</li>
             </h4>
           </ul>
         </div>

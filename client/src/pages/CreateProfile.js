@@ -142,6 +142,7 @@ class CreateProfile extends Component {
             </div>
             <TextInput
               placeholder="AGE"
+              title="AGE"
               name="age"
               type="number"
               value={age}
@@ -149,6 +150,7 @@ class CreateProfile extends Component {
             />
             <TextInput
               placeholder="HEIGHT IN INCHES"
+              title="HEIGHT"
               name="height"
               type="number"
               value={height}
@@ -156,6 +158,7 @@ class CreateProfile extends Component {
             />
             <TextInput
               placeholder="WEIGHT IN IBS"
+              title="WEIGHT"
               name="weight"
               type="number"
               value={weight}
@@ -163,6 +166,7 @@ class CreateProfile extends Component {
             />
             <TextInput
               placeholder="GOAL WEIGHT"
+              title="GOAL WEIGHT"
               name="goalWeight"
               type="number"
               value={goalWeight}

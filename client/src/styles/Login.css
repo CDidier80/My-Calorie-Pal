@@ -25,7 +25,8 @@
 .signup form input,
 .login form input,
 .profile form input {
-  margin: 2em 25%;
+  justify-self: center;
+  margin: -1em 0 2em 25%;
   font-size: 1em;
   width: 50%;
 }

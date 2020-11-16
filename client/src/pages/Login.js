@@ -37,6 +37,7 @@ class LogIn extends Component {
           <h3>Login</h3>
           <TextInput
             placeholder="Email"
+            title="EMAIL"
             name="email"
             type="email"
             value={email}
@@ -44,6 +45,7 @@ class LogIn extends Component {
           />
           <TextInput
             placeholder="Password"
+            title="PASSWORD"
             name="password"
             value={password}
             type="password"
