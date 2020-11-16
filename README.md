@@ -11,7 +11,7 @@
 ## Overview
 
 - Fitness Tracker :muscle:
-- Gives recommended calorie intake based on gender and weight
+- Gives recommended calorie intake based on gender, weight, activity level and weekly goal
 - Lookup food on a third party api/or enter nutritional information manually and create meals with them :pizza:
 - Keep track of daily calorie intake and compare against recommended calorie intake
 - Enter and track excercise and get back estimated burned calories
@@ -49,18 +49,20 @@ The project was deployed on ... and can be found [here](...)
 
 ### Future Updates
 
-- [x] ~~Add Macros~~
+- [x] ~~macro calculator~~
+- [x] ~~macro pie chart~~
+- [x] ~~implement third party API~~
 - [x] ~~find calorie burning caculator~~
-- [ ] save meals that user can reuese
+- [x] ~~save meals that user can reuese~~
 
 ---
 
 ### Credits
 
-- Api:
+- Api's:
 
-        • https://www.nutritionix.com/
-        • https://type.fit/api/quotes
+  - https://www.nutritionix.com/
+  - https://type.fit/api/quotes
 
 - Bootstrap-React
 - react-flatpickr
