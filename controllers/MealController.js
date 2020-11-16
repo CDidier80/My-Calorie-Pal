@@ -38,9 +38,34 @@ const UpdateMeal = async (req, res) => {
   res.send(updatedMeal);
 };
 
+const GetPreviosMeals = async (req, res) => {
+  const meals = await Meal.find({ user_id: req.params.user_id }).find({
+    date: req.params.date,
+  });
+  res.send({ meals });
+};
+
+const RecreateMeal = async (req, res) => {
+  const body = req.body;
+  const meal = new Meal({
+    name: body.name,
+    date: new Date().toISOString().slice(0, 10),
+    foods: body.foods,
+    totalCalories: body.totalCalories,
+    totalProtein: body.totalProtein,
+    totalCarbs: body.totalCarbs,
+    totalFat: body.totalFat,
+    user_id: req.params.user_id,
+  });
+  meal.save();
+  res.send(meal);
+};
+
 module.exports = {
   CreateMeal,
   RemoveMeal,
   GetMeal,
   UpdateMeal,
+  GetPreviosMeals,
+  RecreateMeal,
 };

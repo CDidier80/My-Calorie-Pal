@@ -1,15 +1,15 @@
+import React, { Component } from "react";
+
 import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/material_blue.css";
+import Table from "react-bootstrap/Table";
 import { PieChart } from "react-minimal-pie-chart";
 
-import React, { Component } from "react";
 import { __GetDiary } from "../services/UserServices";
 import { __RemoveMeal } from "../services/MealServices";
 import { __DeleteExercise } from "../services/ExerciseServices";
 
 import Card from "../components/Card";
-
-import Table from "react-bootstrap/Table";
 
 class Diary extends Component {
   constructor() {

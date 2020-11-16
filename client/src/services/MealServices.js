@@ -35,3 +35,20 @@ export const __UpDateMeal = async (formData, mealId) => {
     throw error;
   }
 };
+
+export const __GetPreviousMeals = async (userId, date) => {
+  try {
+    const res = await ApiClient.get(`/meals/get/${userId}/${date}`);
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const __RecreateMeal = async (formData, userId) => {
+  try {
+    const res = await ApiClient.post(`meals/recreate/${userId}`, formData);
+  } catch (error) {
+    throw error;
+  }
+};

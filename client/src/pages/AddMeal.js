@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import PreviousMeals from "../components/PreviousMeals";
+
 import AddSearchFoods from "./AddSearchFoods";
 import TextInput from "../components/TextInput";
 
@@ -66,6 +68,7 @@ class AddMeal extends Component {
                 </button>
               </form>
             </div>
+            <PreviousMeals currentUser={this.props.currentUser} />
           </div>
         )}
       </div>

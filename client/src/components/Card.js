@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import MealCard from "./MealCard";
 import ExerciseCard from "./ExerciseCard";
 
-import { __GetMeal } from "../services/MealServices";
+import { __GetMeal, __RecreateMeal } from "../services/MealServices";
 import { __GetFood } from "../services/FoodServices";
 import { __GetExercise } from "../services/ExerciseServices";
 
@@ -17,6 +17,14 @@ class Card extends Component {
       exercise: "",
     };
   }
+
+  recreateMeal = async () => {
+    try {
+      await __RecreateMeal(this.state.meal, this.props.currentUser._id);
+    } catch (error) {
+      throw error;
+    }
+  };
 
   getExercise = async (exerciseId) => {
     this.setState({ exercise: [] });
@@ -62,6 +70,11 @@ class Card extends Component {
     this.setState({ clicked: !this.state.clicked });
   };
 
+  handleRecreateMeal = (event) => {
+    event.preventDefault();
+    this.recreateMeal();
+  };
+
   render() {
     const { clicked, food, exercise } = this.state;
 
@@ -87,7 +100,7 @@ class Card extends Component {
             duration={exercise.duration}
           />
         ) : null}
-        {clicked ? (
+        {clicked && this.props.onClick ? (
           <button
             className="mealCard-button"
             value={this.props.value}
@@ -96,6 +109,9 @@ class Card extends Component {
           >
             Remove
           </button>
+        ) : null}
+        {clicked && !this.props.onClick ? (
+          <button onClick={this.handleRecreateMeal}>Add Meal</button>
         ) : null}
       </td>
     );
