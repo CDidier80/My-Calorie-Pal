@@ -54,7 +54,8 @@ The project was deployed on ... and can be found [here](...)
 - [x] ~~implement third party API~~
 - [x] ~~find calorie burning caculator~~
 - [x] ~~save meals that user can reuese~~
-- [ ] let user pick number of servings
+- [x] ~~let user pick number of servings~~
+- [ ] let user update servings
 
 ### Trello Board
 

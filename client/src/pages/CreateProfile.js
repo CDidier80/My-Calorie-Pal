@@ -150,7 +150,7 @@ class CreateProfile extends Component {
             />
             <TextInput
               placeholder="HEIGHT IN INCHES"
-              title="HEIGHT"
+              title="HEIGHT(in)"
               name="height"
               type="number"
               value={height}
@@ -158,7 +158,7 @@ class CreateProfile extends Component {
             />
             <TextInput
               placeholder="WEIGHT IN IBS"
-              title="WEIGHT"
+              title="WEIGHT(lbs)"
               name="weight"
               type="number"
               value={weight}
@@ -166,7 +166,7 @@ class CreateProfile extends Component {
             />
             <TextInput
               placeholder="GOAL WEIGHT"
-              title="GOAL WEIGHT"
+              title="GOAL WEIGHT(lbs)"
               name="goalWeight"
               type="number"
               value={goalWeight}

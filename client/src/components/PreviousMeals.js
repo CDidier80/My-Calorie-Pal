@@ -69,10 +69,7 @@ class PreviousMeals extends Component {
           </form>
         </div>
         <div className="center block">
-          <Table
-            id="prev-meals"
-            className="table table-striped table-bordered table-hover"
-          >
+          <Table className="table table-striped table-bordered table-hover">
             <tbody>
               <tr>
                 {meals
