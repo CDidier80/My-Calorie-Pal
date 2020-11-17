@@ -4,6 +4,8 @@ const CreateFood = async (req, res) => {
   const body = req.body;
   const food = new Food({
     description: body.description,
+    servingSize: body.servingSize,
+    servings: body.servings,
     calories: body.calories,
     protein: body.protein,
     carbs: body.carbs,

@@ -12,7 +12,7 @@ class PreviousMeals extends Component {
   constructor() {
     super();
     this.state = {
-      date: new Date().toISOString().slice(0, 10),
+      date: "",
       meals: [],
     };
   }
@@ -25,7 +25,7 @@ class PreviousMeals extends Component {
     let year = yesterday.getFullYear();
     this.setState({ date: `${year}-${month}-${day}` });
 
-    this.getPreviousMeals();
+    setTimeout(() => this.getPreviousMeals(), 5);
   }
 
   getPreviousMeals = async () => {
@@ -74,18 +74,18 @@ class PreviousMeals extends Component {
             className="table table-striped table-bordered table-hover"
           >
             <tbody>
-              {meals
-                ? meals.map((element) => (
-                    <tr>
+              <tr>
+                {meals
+                  ? meals.map((element) => (
                       <Card
                         currentUser={this.props.currentUser}
                         key={element._id}
                         value={element._id}
                         name={element.name}
                       />
-                    </tr>
-                  ))
-                : null}
+                    ))
+                  : null}
+              </tr>
             </tbody>
           </Table>
         </div>

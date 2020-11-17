@@ -6,6 +6,14 @@ module.exports = new Schema(
       type: String,
       required: true,
     },
+    servingSize: {
+      type: Number,
+      required: true,
+    },
+    servings: {
+      type: Number,
+      required: true,
+    },
     calories: {
       type: Number,
       required: true,

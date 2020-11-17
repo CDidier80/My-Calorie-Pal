@@ -1,6 +1,6 @@
 body {
   font-family: "Roboto", sans-serif;
-  min-width: 1600px;
+  min-width: 1200px;
 }
 .flex-row {
   display: flex;
@@ -76,5 +76,10 @@ button {
 }
 .text-title {
   font-weight: 650;
+  width: 2em;
   margin-bottom: -4em;
+}
+.serving-size {
+  background-color: black;
+  width: 20px;
 }

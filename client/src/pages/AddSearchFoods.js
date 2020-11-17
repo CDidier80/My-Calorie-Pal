@@ -22,6 +22,7 @@ class AddSearchFoods extends Component {
       date: new Date().toISOString().slice(0, 10),
       tag_id: "",
       description: "",
+      servingSize: "",
       calories: "",
       protein: "",
       carbs: "",
@@ -33,6 +34,7 @@ class AddSearchFoods extends Component {
       totalCarbs: 0,
       totalFat: 0,
       render: false,
+      servings: 1,
     };
   }
 
@@ -83,11 +85,13 @@ class AddSearchFoods extends Component {
   };
 
   createFood = async () => {
+    this.handleServings();
     try {
       await __CreateFood(this.state, this.props.meal_id);
       this.setState({
-        foodAdded: true,
         description: "",
+        servingSize: "",
+        servings: 1,
         calories: "",
         protein: "",
         carbs: "",
@@ -141,6 +145,7 @@ class AddSearchFoods extends Component {
       let data = res.data.foods[0];
       this.setState({
         calories: data.nf_calories,
+        servingSize: data.serving_weight_grams,
         protein: data.nf_protein,
         carbs: data.nf_total_carbohydrate,
         fat: data.nf_total_fat,
@@ -168,6 +173,16 @@ class AddSearchFoods extends Component {
     e.preventDefault();
     this.removeFood(e.target.value);
     setTimeout(() => this.getTotalCals(), 50);
+  };
+
+  handleServings = () => {
+    let servings = this.state.servings;
+    this.setState({
+      calories: this.state.calories * servings,
+      protein: this.state.protein * servings,
+      carbs: this.state.carbs * servings,
+      fat: this.state.fat * servings,
+    });
   };
 
   getTotalCals = () => {
@@ -202,7 +217,7 @@ class AddSearchFoods extends Component {
   };
 
   render() {
-    const { description, name } = this.state;
+    const { description, name, servings } = this.state;
 
     return (
       <div>
@@ -226,6 +241,14 @@ class AddSearchFoods extends Component {
                   value={description}
                   onChange={this.handleChange}
                 />
+                <TextInput
+                  title="Servings"
+                  placeholder="1"
+                  name="servings"
+                  type="number"
+                  value={servings}
+                  onChange={this.handleChange}
+                />
                 <button className="profile-button" type="submit">
                   Search
                 </button>
@@ -237,10 +260,12 @@ class AddSearchFoods extends Component {
                   <tr>
                     <th>{name}</th>
                     <th>Food Item</th>
+                    <th>Serving Size(g)</th>
+                    <th>Servings</th>
                     <th>Calories</th>
-                    <th>Protein</th>
-                    <th>Carbs</th>
-                    <th>Fat</th>
+                    <th>Protein(g)</th>
+                    <th>Carbs(g)</th>
+                    <th>Fat(g)</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -257,6 +282,8 @@ class AddSearchFoods extends Component {
                         </button>
                       </td>
                       <td>{element.description}</td>
+                      <td>{element.servingSize}</td>
+                      <td>{element.servings}</td>
                       <td>{element.calories} </td>
                       <td>{element.protein}</td>
                       <td>{element.carbs}</td>
@@ -264,8 +291,10 @@ class AddSearchFoods extends Component {
                     </tr>
                   ))}
                   <tr>
-                    <td></td>
                     <td>Totals</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td>{this.state.totalCalories}</td>
                     <td>{this.state.totalProtein}</td>
                     <td>{this.state.totalCarbs}</td>

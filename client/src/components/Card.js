@@ -79,7 +79,6 @@ class Card extends Component {
   };
 
   render() {
-    console.log(this.props);
     const { clicked, food, exercise } = this.state;
 
     const foodContent = food.map((element) => (
@@ -119,7 +118,7 @@ class Card extends Component {
             <div>{this.state.meal.name}</div>
             {foodContent}
             <button className="recreate" onClick={this.handleRecreateMeal}>
-              Add Meal to Today
+              Add to Today
             </button>
           </div>
         )}

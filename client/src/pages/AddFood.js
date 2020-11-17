@@ -15,6 +15,8 @@ class AddFood extends Component {
     super();
     this.state = {
       description: "",
+      servingSize: "",
+      servings: "",
       calories: "",
       protein: "",
       carbs: "",
@@ -91,8 +93,9 @@ class AddFood extends Component {
     try {
       await __CreateFood(this.state, this.props.meal_id);
       this.setState({
-        foodAdded: true,
         description: "",
+        servingSize: "",
+        servings: "",
         calories: "",
         protein: "",
         carbs: "",
@@ -122,10 +125,23 @@ class AddFood extends Component {
       this.state.calories &&
       this.state.protein &&
       this.state.carbs &&
-      this.state.fat
+      this.state.fat &&
+      this.state.servingSize &&
+      this.state.servings
     ) {
-      this.createFood();
+      this.handleServings();
+      setTimeout(() => this.createFood(), 5);
     }
+  };
+
+  handleServings = () => {
+    let servings = this.state.servings;
+    this.setState({
+      calories: this.state.calories * servings,
+      protein: this.state.protein * servings,
+      carbs: this.state.carbs * servings,
+      fat: this.state.fat * servings,
+    });
   };
 
   getTotalCals = () => {
@@ -154,7 +170,16 @@ class AddFood extends Component {
   };
 
   render() {
-    const { description, calories, protein, carbs, fat, name } = this.state;
+    const {
+      description,
+      calories,
+      protein,
+      carbs,
+      fat,
+      name,
+      servingSize,
+      servings,
+    } = this.state;
     return (
       <div>
         <div className="profile">
@@ -167,6 +192,20 @@ class AddFood extends Component {
               onChange={this.handleChange}
             />
             <div className="grid-food">
+              <TextInput
+                placeholder="Servings"
+                name="servings"
+                type="number"
+                value={servings}
+                onChange={this.handleChange}
+              />
+              <TextInput
+                placeholder="Serving Size"
+                name="servingSize"
+                type="number"
+                value={servingSize}
+                onChange={this.handleChange}
+              />
               <TextInput
                 placeholder="Calories"
                 name="calories"
@@ -207,10 +246,12 @@ class AddFood extends Component {
               <tr>
                 <th>{name}</th>
                 <th>Food Item</th>
+                <th>Serving Size(g)</th>
+                <th>Servings</th>
                 <th>Calories</th>
-                <th>Protein</th>
-                <th>Carbs</th>
-                <th>Fat</th>
+                <th>Protein(g)</th>
+                <th>Carbs(g)</th>
+                <th>Fat(g)</th>
               </tr>
             </thead>
             <tbody>
@@ -227,15 +268,19 @@ class AddFood extends Component {
                     </button>
                   </td>
                   <td>{element.description}</td>
-                  <td> {element.calories} </td>
+                  <td>{element.servingSize}</td>
+                  <td>{element.servings}</td>
+                  <td>{element.calories} </td>
                   <td>{element.protein}</td>
                   <td>{element.carbs}</td>
                   <td>{element.fat}</td>
                 </tr>
               ))}
               <tr>
-                <td></td>
                 <td>Totals</td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td>{this.state.totalCalories}</td>
                 <td>{this.state.totalProtein}</td>
                 <td>{this.state.totalCarbs}</td>
