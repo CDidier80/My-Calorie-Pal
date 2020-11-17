@@ -143,10 +143,9 @@ class AddSearchFoods extends Component {
         },
       });
       let data = res.data.foods[0];
-      console.log(data);
       this.setState({
         calories: data.nf_calories,
-        servingSize: data.serving_weight_grams || 0,
+        servingSize: data.serving_weight_grams || "< 0",
         protein: data.nf_protein,
         carbs: data.nf_total_carbohydrate,
         fat: data.nf_total_fat,

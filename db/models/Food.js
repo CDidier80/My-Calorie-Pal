@@ -7,7 +7,7 @@ module.exports = new Schema(
       required: true,
     },
     servingSize: {
-      type: Number,
+      type: String,
       required: true,
     },
     servings: {
