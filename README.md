@@ -43,7 +43,7 @@
 
 ### Getting Started
 
-The project was deployed on ... and can be found [here](...)
+The project was deployed on Heroku and can be found [here](https://my-calorie-pal.herokuapp.com/)
 
 ---
 
