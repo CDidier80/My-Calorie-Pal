@@ -166,7 +166,7 @@ class Diary extends Component {
         <h5>
           Recommended Cals: {profile.recCalIntake || 0} - Consumed Cals:{" "}
           {totalCalories} = Calories Remaining:{" "}
-          {profile.recCalIntake - totalCalories}
+          {(profile.recCalIntake || 0) - totalCalories}
         </h5>
         <h5>Total Cals Burned: {totalCalsBurned}</h5>
         <div className="center block">
