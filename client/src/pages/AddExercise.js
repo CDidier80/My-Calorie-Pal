@@ -38,7 +38,9 @@ class AddExercise extends Component {
   getProfile = async (userId) => {
     try {
       const profileData = await __GetProfile(this.props.currentUser._id);
-      this.setState({ weight: profileData.profile.weight });
+      if (profileData.profile) {
+        this.setState({ weight: profileData.profile.weight });
+      }
     } catch (error) {
       throw error;
     }

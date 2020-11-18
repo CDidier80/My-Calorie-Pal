@@ -39,9 +39,18 @@ class Profile extends Component {
           <form className="profile-form">
             <div className="info"> Age: {age} </div>
             <div className="info"> Gender: {gender} </div>
-            <div className="info"> Height: {height}in </div>
-            <div className="info"> Current Weight: {weight} </div>
-            <div className="info"> Goal Weight: {goalWeight} </div>
+            <div className="info">
+              {" "}
+              Height: {height ? `${height} in` : null}{" "}
+            </div>
+            <div className="info">
+              {" "}
+              Current Weight: {weight ? `${weight} lbs` : null}{" "}
+            </div>
+            <div className="info">
+              {" "}
+              Goal Weight: {goalWeight ? `${goalWeight} lbs` : null}{" "}
+            </div>
             <div className="info"> Weekly Goal: {weeklyGoal} </div>
             <div className="info"> Daily Calories: {recCalIntake}</div>
           </form>
