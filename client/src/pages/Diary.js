@@ -145,9 +145,9 @@ class Diary extends Component {
       totalCalories,
       totalCalsBurned,
     } = this.state;
-    let protein = Math.round((totalProtein / totalCalories) * 100 * 4);
-    let carbs = Math.round((totalCarbs / totalCalories) * 100 * 4);
-    let fat = Math.round((totalFat / totalCalories) * 100 * 9);
+    let protein = Math.round((totalProtein / totalCalories) * 100 * 4) || 0;
+    let carbs = Math.round((totalCarbs / totalCalories) * 100 * 4) || 0;
+    let fat = Math.round((totalFat / totalCalories) * 100 * 9) || 0;
     return (
       <div>
         <div className="center">
@@ -164,7 +164,7 @@ class Diary extends Component {
           </form>
         </div>
         <h5>
-          Recommended Cals: {profile.recCalIntake} - Consumed Cals:{" "}
+          Recommended Cals: {profile.recCalIntake || 0} - Consumed Cals:{" "}
           {totalCalories} = Calories Remaining:{" "}
           {profile.recCalIntake - totalCalories}
         </h5>
