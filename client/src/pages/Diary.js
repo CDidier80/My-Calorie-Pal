@@ -134,7 +134,6 @@ class Diary extends Component {
   };
 
   render() {
-    console.log(this.state);
     const {
       date,
       meals,

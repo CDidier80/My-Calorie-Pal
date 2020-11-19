@@ -98,8 +98,8 @@ class AddSearchFoods extends Component {
         fat: "",
       });
       setTimeout(() => this.upDateMeal(), 50);
-      setTimeout(() => this.getTotalCals(), 100);
-      setTimeout(() => this.upDateMeal(), 500);
+      setTimeout(() => this.getTotalCals(), 500);
+      setTimeout(() => this.upDateMeal(), 1000);
     } catch (error) {
       console.log(error);
     }
