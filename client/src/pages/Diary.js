@@ -83,7 +83,6 @@ class Diary extends Component {
         meals: diaryData.meals,
         exercise: diaryData.exercises,
         profile: diaryData.profile[0],
-        recCalIntake: diaryData.profile[0].recCalIntake,
       });
     } catch (error) {
       console.log("error");
@@ -135,6 +134,7 @@ class Diary extends Component {
   };
 
   render() {
+    console.log(this.state);
     const {
       date,
       meals,
