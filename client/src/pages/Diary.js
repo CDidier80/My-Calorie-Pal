@@ -32,8 +32,8 @@ class Diary extends Component {
   componentDidMount() {
     this.setState({ date: new Date().toISOString().slice(0, 10) });
     setTimeout(() => this.getDiary(), 10);
-    setTimeout(() => this.getTotalCals(), 50);
-    setTimeout(() => this.getTotalCalsBurned(), 50);
+    setTimeout(() => this.getTotalCals(), 100);
+    setTimeout(() => this.getTotalCalsBurned(), 100);
   }
 
   getTotalCalsBurned = () => {
@@ -83,6 +83,7 @@ class Diary extends Component {
         meals: diaryData.meals,
         exercise: diaryData.exercises,
         profile: diaryData.profile[0],
+        recCalIntake: diaryData.profile[0].recCalIntake,
       });
     } catch (error) {
       console.log("error");
@@ -121,8 +122,8 @@ class Diary extends Component {
     let year = date.getFullYear();
     this.setState({ date: `${year}-${month}-${day}` });
     this.getDiary();
-    setTimeout(() => this.getTotalCals(), 50);
-    setTimeout(() => this.getTotalCalsBurned(), 50);
+    setTimeout(() => this.getTotalCals(), 100);
+    setTimeout(() => this.getTotalCalsBurned(), 100);
   };
 
   handleClick = (e) => {
