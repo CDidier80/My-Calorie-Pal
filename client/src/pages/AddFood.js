@@ -101,8 +101,9 @@ class AddFood extends Component {
         carbs: "",
         fat: "",
       });
+      setTimeout(() => this.upDateMeal(), 50);
+      setTimeout(() => this.getTotalCals(), 100);
       setTimeout(() => this.upDateMeal(), 500);
-      setTimeout(() => this.getTotalCals(), 1000);
     } catch (error) {
       throw error;
     }
