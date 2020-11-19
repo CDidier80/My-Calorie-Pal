@@ -112,6 +112,8 @@ class AddSearchFoods extends Component {
         foods: prevState.foods.filter((food) => food._id !== foodId),
       }));
       this.upDateMeal();
+      setTimeout(() => this.getTotalCals(), 50);
+      setTimeout(() => this.upDateMeal(), 500);
     } catch (error) {
       throw error;
     }
@@ -173,7 +175,6 @@ class AddSearchFoods extends Component {
   handleClick = (e) => {
     e.preventDefault();
     this.removeFood(e.target.value);
-    setTimeout(() => this.getTotalCals(), 50);
   };
 
   handleServings = () => {

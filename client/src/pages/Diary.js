@@ -95,6 +95,7 @@ class Diary extends Component {
       this.setState((prevState) => ({
         meals: prevState.meals.filter((meal) => meal._id !== mealId),
       }));
+      setTimeout(() => this.getTotalCals(), 200);
     } catch (error) {
       throw error;
     }
@@ -108,6 +109,7 @@ class Diary extends Component {
           (exercise) => exercise._id !== exerciseId
         ),
       }));
+      setTimeout(() => this.getTotalCalsBurned(), 200);
     } catch (error) {
       throw error;
     }
@@ -129,8 +131,6 @@ class Diary extends Component {
     e.preventDefault();
     this.removeMeal(e.target.value);
     this.deleteExercise(e.target.value);
-    setTimeout(() => this.getTotalCals(), 50);
-    setTimeout(() => this.getTotalCalsBurned(), 50);
   };
 
   render() {
